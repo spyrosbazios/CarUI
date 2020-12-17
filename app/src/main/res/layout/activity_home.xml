@@ -7,37 +7,37 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/home_background_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/background_img"
         android:background="@drawable/background"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/home_curve_img"
-        android:layout_width="wrap_content"
-        android:layout_height="130dp"
+        android:id="@+id/curve_img"
         android:background="@drawable/curve"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="130dp" />
 
     <LinearLayout
         android:id="@+id/linearlayout_screen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/linearlayout_texts"
+            app:layout_constraintStart_toStartOf="@+id/linearlayout_screen"
+            app:layout_constraintTop_toTopOf="@+id/linearlayout_screen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="6"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/linearlayout_screen"
-            app:layout_constraintTop_toTopOf="@+id/linearlayout_screen">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textview_weather"
@@ -74,47 +74,43 @@
 
         <LinearLayout
             android:id="@+id/linearlayout_buttons"
+            app:layout_constraintStart_toStartOf="@+id/linearlayout_screen"
+            app:layout_constraintTop_toBottomOf="@+id/linearlayout_screen"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="15dp"
-            android:layout_weight="5"
-            app:layout_constraintStart_toStartOf="@+id/linearlayout_screen"
-            app:layout_constraintTop_toBottomOf="@+id/linearlayout_screen">
+            android:layout_weight="5">
 
             <ImageButton
-                android:id="@+id/home_gps_btn"
+                android:id="@+id/gps_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/gpsbutton"/>
-
             <ImageButton
-                android:id="@+id/home_radio_btn"
+                android:id="@+id/radio_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/radiobutton"/>
-
             <ImageButton
-                android:id="@+id/home_phone_btn"
+                android:id="@+id/phone_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/phonebutton"/>
-
             <ImageButton
-                android:id="@+id/home_settings_btn"
+                android:id="@+id/settings_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/settingsbutton"/>
-
         </LinearLayout>
 
     </LinearLayout>

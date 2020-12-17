@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -28,9 +29,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        weatherTextView = findViewById(R.id.textview_weather);
-        timeTextView = findViewById(R.id.textview_time);
-        dateTextView = findViewById(R.id.textview_date);
+        weatherTextView = (TextView)findViewById(R.id.textview_weather);
+        timeTextView = (TextView)findViewById(R.id.textview_time);
+        dateTextView = (TextView)findViewById(R.id.textview_date);
 
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         int month = cal.get(Calendar.MONTH);
@@ -49,10 +50,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String day = d < 10 ? "0"+d : String.valueOf(d);
         dateTextView.setText(day + " " + (new DateFormatSymbols().getMonths()[month]).substring(0, 3).toUpperCase());
 
-        gpsBtn = findViewById(R.id.home_gps_btn);
-        radioBtn = findViewById(R.id.home_radio_btn);
-        phoneBtn = findViewById(R.id.home_phone_btn);
-        settingsBtn = findViewById(R.id.home_settings_btn);
+        gpsBtn = (ImageButton)findViewById(R.id.gps_btn);
+        radioBtn = (ImageButton)findViewById(R.id.radio_btn);
+        phoneBtn = (ImageButton)findViewById(R.id.phone_btn);
+        settingsBtn = (ImageButton)findViewById(R.id.settings_btn);
     }
 
     @Override
@@ -64,8 +65,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(HomeActivity.this, GPSActivity.class));
         else if (v == radioBtn)
             startActivity(new Intent(HomeActivity.this, RadioActivity.class));
-        else if (v == phoneBtn)
-            startActivity(new Intent(HomeActivity.this, PhoneActivity.class));
+        else if (v == phoneBtn) {
+            Intent intent = new Intent(HomeActivity.this, PhoneActivity.class);
+            startActivity(intent);
+        }
         else if (v == settingsBtn)
             startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
     }

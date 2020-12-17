@@ -1,6 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/background_img"
+        android:background="@drawable/background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/musicbackground_img"
+        app:srcCompat="@drawable/musicbackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/linearlayout_screen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp">
+
+        <LinearLayout
+            android:id="@+id/linearlayout_contacts"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/contacts_img"
+                android:background="@drawable/contactsimage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_gravity="left"
+                android:layout_marginTop="35dp"/>
+            <ListView
+                android:id="@+id/contacts_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ListView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_music"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/music_img"
+                android:background="@drawable/musicimage"
+                android:layout_width="110dp"
+                android:layout_height="75dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="35dp"
+                android:layout_weight="1"/>
+            <ImageView
+                android:id="@+id/cover_img"
+                android:background="@drawable/rosescover"
+                android:layout_width="150dp"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"/>
+            <ImageView
+                android:id="@+id/title_img"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="7"
+                android:background="@drawable/rosestitle" />
+            <ImageView
+                android:id="@+id/musicbar_img"
+                android:background="@drawable/musicbar"
+                android:layout_width="250dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="0dp"
+                android:rotation="1.1"
+                android:layout_gravity="center"/>
+            <LinearLayout
+                android:id="@+id/linearlayout_musicbuttons"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp">
+
+                <ImageView
+                    android:id="@+id/musicloop_img"
+                    android:background="@drawable/musicloop"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/musicprevious_img"
+                    android:background="@drawable/musicprevious"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.75"/>
+                <ImageButton
+                    android:id="@+id/musicplay_btn"
+                    android:background="@drawable/musicplay"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_weight="2"/>
+                <ImageView
+                    android:id="@+id/musicnext_img"
+                    android:background="@drawable/musicnext"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.75"/>
+                <ImageView
+                    android:id="@+id/musicshuffle_img"
+                    android:background="@drawable/musicsuffle"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/home_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="130dp"
+        android:background="@drawable/awsomehomebutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
