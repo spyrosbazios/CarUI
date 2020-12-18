@@ -27,7 +27,9 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         homeButton = (ImageButton)findViewById(R.id.home_btn);
+        homeButton.setOnClickListener(this);
         playButton = (ImageButton)findViewById(R.id.musicplay_btn);
+        playButton.setOnClickListener(this);
 
         contactListView = (ListView)findViewById(R.id.contacts_listview);
         ArrayAdapter<String> contactAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, contactList){
@@ -43,10 +45,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    protected void onPause()
-    {
-        super.onPause();
-    }
+    protected void onPause() {super.onPause();}
 
     @Override
     public void onClick(View v) {

@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity"></activity>
-        <activity android:name=".GPSActivity"></activity>
-        <activity android:name=".RadioActivity"></activity>
-        <activity android:name=".PhoneActivity"></activity>
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".HomeActivity"/>
+        <activity android:name=".GPSActivity"/>
+        <activity android:name=".RadioActivity"/>
+        <activity android:name=".PhoneActivity"/>
+        <activity android:name=".CallingActivity"/>
+        <activity android:name=".SettingsActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
