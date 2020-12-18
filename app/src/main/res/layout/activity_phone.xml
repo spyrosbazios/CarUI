@@ -150,69 +150,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearlayout_overlay"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginTop="130dp">
-
-        <LinearLayout
-            android:id="@+id/linearlayout_phonecall"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/caller_img"
-                android:src="@drawable/nantiaphoto"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="8"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/callername_textview"
-                android:text="Spyros"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/callduration_textview"
-                android:text="Calling..."
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:layout_gravity="center"/>
-            <ImageButton
-                android:id="@+id/hangup_btn"
-                android:background="@drawable/declinecall"
-                android:layout_width="100dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
-                android:layout_weight="4"
-                android:layout_gravity="center"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearlayout_empty"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-        </LinearLayout>
-    </LinearLayout>
-
     <ImageButton
         android:id="@+id/home_btn"
         android:background="@drawable/awsomehomebutton"

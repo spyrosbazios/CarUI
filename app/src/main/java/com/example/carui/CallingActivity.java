@@ -1,28 +1,38 @@
 package com.example.carui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 
 public class CallingActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private LinearLayout answerLayout, holdLayout;
     private ImageButton homeButton, answerBtn, declineBtn;
-    private TextView answerTextView, declineTextView, callerTextView, isCallingTextView;
-    private String caller = "Nantia";
+    private TextView answerTextView, holdTextView, declineTextView, callerTextView, isCallingTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calling);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        answerLayout = (LinearLayout)findViewById(R.id.linearlayout_answercall);
+        holdLayout = (LinearLayout)findViewById(R.id.linearlayout_holdcall);
 
         homeButton = (ImageButton)findViewById(R.id.home_btn);
         homeButton.setOnClickListener(this);
@@ -33,13 +43,24 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
 
         callerTextView = (TextView)findViewById(R.id.callername_textview);
         callerTextView.setTextColor(Color.WHITE);
-        callerTextView.setText(caller);
         isCallingTextView = (TextView)findViewById(R.id.iscalling_textview);
         isCallingTextView.setTextColor(Color.WHITE);
         answerTextView = (TextView)findViewById(R.id.answer_textview);
         answerTextView.setTextColor(Color.WHITE);
+        holdTextView = (TextView)findViewById(R.id.hold_textview);
+        holdTextView.setTextColor(Color.WHITE);
         declineTextView = (TextView)findViewById(R.id.decline_textview);
         declineTextView.setTextColor(Color.WHITE);
+
+        String callerIntent = getIntent().getStringExtra("Caller");
+        if (callerIntent != null) {
+            callerTextView.setText(callerIntent);
+            setAnswerVisibility(false);
+        }
+        else {
+            callerTextView.setText("Nantia");
+            setAnswerVisibility(true);
+        }
     }
 
     @Override
@@ -50,9 +71,25 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
         if (v == homeButton || v == declineBtn)
             startActivity(new Intent(CallingActivity.this, HomeActivity.class));
         else if (v == answerBtn) {
-            Intent intent = new Intent(CallingActivity.this, PhoneActivity.class);
-            intent.putExtra("Caller", caller);
-            startActivity(intent);
+            setAnswerVisibility(false);
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setAnswerVisibility(boolean flag) {
+        if (flag) {
+            for (int i = 0; i < holdLayout.getChildCount(); i++)
+                holdLayout.getChildAt(i).setVisibility(View.GONE);
+            for (int i = 0; i < answerLayout.getChildCount(); i++)
+                answerLayout.getChildAt(i).setVisibility(View.VISIBLE);
+        }
+        else {
+            for (int i = 0; i < answerLayout.getChildCount(); i++)
+                answerLayout.getChildAt(i).setVisibility(View.GONE);
+            for (int i = 0; i < holdLayout.getChildCount(); i++)
+                holdLayout.getChildAt(i).setVisibility(View.VISIBLE);
+            isCallingTextView.setText("00:00");
+            declineTextView.setText("Hang Up");
         }
     }
 }
