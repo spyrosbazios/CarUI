@@ -3,7 +3,6 @@ package com.example.carui;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,7 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class CallingActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageButton homeButton, answerBtn, declineBtn;
-    private TextView answerTextView, declineTextView;
+    private TextView answerTextView, declineTextView, callerTextView, isCallingTextView;
+    private String caller = "Nantia";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,9 +31,14 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
         declineBtn = (ImageButton)findViewById(R.id.decline_btn);
         declineBtn.setOnClickListener(this);
 
+        callerTextView = (TextView)findViewById(R.id.callername_textview);
+        callerTextView.setTextColor(Color.WHITE);
+        callerTextView.setText(caller);
+        isCallingTextView = (TextView)findViewById(R.id.iscalling_textview);
+        isCallingTextView.setTextColor(Color.WHITE);
         answerTextView = (TextView)findViewById(R.id.answer_textview);
-        declineTextView = (TextView)findViewById(R.id.decline_textview);
         answerTextView.setTextColor(Color.WHITE);
+        declineTextView = (TextView)findViewById(R.id.decline_textview);
         declineTextView.setTextColor(Color.WHITE);
     }
 
@@ -42,11 +47,12 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if (v == homeButton)
+        if (v == homeButton || v == declineBtn)
             startActivity(new Intent(CallingActivity.this, HomeActivity.class));
-        else if (v == answerBtn)
-            Toast.makeText(CallingActivity.this, "Phone Answered!", Toast.LENGTH_SHORT).show();
-        else if (v == declineBtn)
-            Toast.makeText(CallingActivity.this, "Phone Declined!", Toast.LENGTH_SHORT).show();
+        else if (v == answerBtn) {
+            Intent intent = new Intent(CallingActivity.this, PhoneActivity.class);
+            intent.putExtra("Caller", caller);
+            startActivity(intent);
+        }
     }
 }

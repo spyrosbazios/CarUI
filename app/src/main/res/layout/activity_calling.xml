@@ -42,7 +42,7 @@
 
             <ImageView
                 android:id="@+id/answer_img"
-                android:background="@drawable/answercall"
+                android:src="@drawable/answercall"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -67,14 +67,21 @@
 
             <ImageView
                 android:id="@+id/caller_img"
-                android:background="@drawable/nantiaphoto"
+                android:src="@drawable/nantiaphoto"
+                android:layout_width="150dp"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/callername_textview"
+                android:text="Spyros"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="5"
+                android:layout_weight="2"
                 android:layout_gravity="center"/>
-            <ImageView
-                android:id="@+id/callername_img"
-                android:background="@drawable/nantia_iscalling___"
+            <TextView
+                android:id="@+id/iscalling_textview"
+                android:text="Is Calling..."
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -92,7 +99,7 @@
 
             <ImageView
                 android:id="@+id/decline_img"
-                android:background="@drawable/declinecall"
+                android:src="@drawable/declinecall"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"

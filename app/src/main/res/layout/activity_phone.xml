@@ -42,7 +42,7 @@
 
             <ImageView
                 android:id="@+id/contacts_img"
-                android:background="@drawable/contactsimage"
+                android:src="@drawable/contactsimage"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="150dp"
@@ -68,7 +68,7 @@
 
             <ImageView
                 android:id="@+id/music_img"
-                android:background="@drawable/musicimage"
+                android:src="@drawable/musicimage"
                 android:layout_width="110dp"
                 android:layout_height="75dp"
                 android:layout_gravity="right"
@@ -76,7 +76,7 @@
                 android:layout_weight="1"/>
             <ImageView
                 android:id="@+id/cover_img"
-                android:background="@drawable/rosescover"
+                android:src="@drawable/rosescover"
                 android:layout_width="150dp"
                 android:layout_height="0dp"
                 android:layout_weight="15"
@@ -84,11 +84,11 @@
                 android:layout_gravity="center"/>
             <ImageView
                 android:id="@+id/title_img"
+                android:src="@drawable/rosestitle"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:layout_weight="7"
-                android:background="@drawable/rosestitle" />
+                android:layout_weight="7"/>
             <ImageView
                 android:id="@+id/musicbar_img"
                 android:background="@drawable/musicbar"
@@ -147,9 +147,70 @@
                     android:layout_marginEnd="30dp"
                     android:layout_weight="1"/>
             </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearlayout_overlay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginTop="130dp">
+
+        <LinearLayout
+            android:id="@+id/linearlayout_phonecall"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/caller_img"
+                android:src="@drawable/nantiaphoto"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="8"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/callername_textview"
+                android:text="Spyros"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/callduration_textview"
+                android:text="Calling..."
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:layout_gravity="center"/>
+            <ImageButton
+                android:id="@+id/hangup_btn"
+                android:background="@drawable/declinecall"
+                android:layout_width="100dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="4"
+                android:layout_gravity="center"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linearlayout_empty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+        </LinearLayout>
     </LinearLayout>
 
     <ImageButton
