@@ -18,17 +18,25 @@ public class Utilities {
     public static String calcTime() {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         int h = cal.get(Calendar.HOUR_OF_DAY);
-        String hours = h < 10 ? "0"+h : String.valueOf(h);
         int m = cal.get(Calendar.MINUTE);
-        String minutes = m < 10 ? "0"+m : String.valueOf(m);
-        return hours + ":" + minutes;
+        return addZeroInBeginning(h) + ":" + addZeroInBeginning(m);
     }
 
     public static String calcDate() {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         int d = cal.get(Calendar.DAY_OF_MONTH);
-        int month = cal.get(Calendar.MONTH);
-        String day = d < 10 ? "0"+d : String.valueOf(d);
-        return day + " " + (new DateFormatSymbols().getMonths()[month]).substring(0, 3).toUpperCase();
+        int m = cal.get(Calendar.MONTH);
+        return addZeroInBeginning(d) + " " + (new DateFormatSymbols().getMonths()[m]).substring(0, 3).toUpperCase();
+    }
+
+    public static int clampIntToLimits (int x, int min, int max) {
+        if (x < min) return max;
+        else if (x > max) return min;
+        return x;
+        //return Math.min(Math.max(x, min), max);
+    }
+
+    public static String addZeroInBeginning (int x) {
+        return x < 10 ? "0"+x : String.valueOf(x);
     }
 }

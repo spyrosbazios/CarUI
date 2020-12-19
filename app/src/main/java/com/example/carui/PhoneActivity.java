@@ -37,6 +37,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
 
         homeButton = (ImageButton)findViewById(R.id.home_btn);
         homeButton.setOnClickListener(this);
+
         playButton = (ImageButton)findViewById(R.id.musicplay_btn);
         playButton.setOnClickListener(this);
 

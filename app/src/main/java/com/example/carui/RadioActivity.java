@@ -37,6 +37,7 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
 
         homeButton = (ImageButton)findViewById(R.id.home_btn);
         homeButton.setOnClickListener(this);
+
         radioButton = (Button)findViewById(R.id.radio_btn);
         radioButton.setOnClickListener(this);
         radioButton.setOnLongClickListener(this);
@@ -89,9 +90,7 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
         else if (v == previousButton || v == nextButton) {
             if (v == previousButton) i--;
             else i++;
-            if (i < 0) i = stationArray.length-1;
-            if (i > stationArray.length-1) i = 0;
-            radioButton.setText(stationArray[i]);
+            radioButton.setText(stationArray[Utilities.clampIntToLimits(i, 0, stationArray.length)]);
         } else {
             outerloop: for (int i = 1; i < 4; i ++) {
                 for (int j = 0; j < 2; j++) {

@@ -36,16 +36,18 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
 
         homeButton = (ImageButton)findViewById(R.id.home_btn);
         homeButton.setOnClickListener(this);
+
         answerBtn = (ImageButton)findViewById(R.id.answer_btn);
         answerBtn.setOnClickListener(this);
+        answerTextView = (TextView)findViewById(R.id.answer_textview);
+        holdTextView = (TextView)findViewById(R.id.hold_textview);
+
         declineBtn = (ImageButton)findViewById(R.id.decline_btn);
         declineBtn.setOnClickListener(this);
+        declineTextView = (TextView)findViewById(R.id.decline_textview);
 
         callerTextView = (TextView)findViewById(R.id.callername_textview);
         isCallingTextView = (TextView)findViewById(R.id.iscalling_textview);
-        answerTextView = (TextView)findViewById(R.id.answer_textview);
-        holdTextView = (TextView)findViewById(R.id.hold_textview);
-        declineTextView = (TextView)findViewById(R.id.decline_textview);
 
         String callerIntent = getIntent().getStringExtra("Caller");
         if (callerIntent != null) {
