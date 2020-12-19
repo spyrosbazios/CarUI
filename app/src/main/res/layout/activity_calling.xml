@@ -14,8 +14,8 @@
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/musicbackground_img"
-        app:srcCompat="@drawable/musicbackground"
+        android:id="@+id/callbackground_img"
+        app:srcCompat="@drawable/callbackgound"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="wrap_content"
@@ -50,6 +50,7 @@
             <TextView
                 android:id="@+id/answer_textview"
                 android:text="Answer"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -78,10 +79,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:textColor="@color/white"/>
             <TextView
                 android:id="@+id/iscalling_textview"
                 android:text="Is Calling..."
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -107,6 +110,7 @@
             <TextView
                 android:id="@+id/decline_textview"
                 android:text="Decline"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -144,6 +148,7 @@
             <TextView
                 android:id="@+id/hold_textview"
                 android:text="Hold"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"

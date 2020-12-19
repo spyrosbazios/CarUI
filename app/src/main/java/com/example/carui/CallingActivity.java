@@ -42,15 +42,10 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
         declineBtn.setOnClickListener(this);
 
         callerTextView = (TextView)findViewById(R.id.callername_textview);
-        callerTextView.setTextColor(Color.WHITE);
         isCallingTextView = (TextView)findViewById(R.id.iscalling_textview);
-        isCallingTextView.setTextColor(Color.WHITE);
         answerTextView = (TextView)findViewById(R.id.answer_textview);
-        answerTextView.setTextColor(Color.WHITE);
         holdTextView = (TextView)findViewById(R.id.hold_textview);
-        holdTextView.setTextColor(Color.WHITE);
         declineTextView = (TextView)findViewById(R.id.decline_textview);
-        declineTextView.setTextColor(Color.WHITE);
 
         String callerIntent = getIntent().getStringExtra("Caller");
         if (callerIntent != null) {

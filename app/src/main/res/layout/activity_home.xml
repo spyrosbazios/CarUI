@@ -57,7 +57,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textSize="50dp"
-                android:textColor="#FFF"
+                android:textColor="@color/white"
                 android:text="08:09"/>
             <TextView
                 android:id="@+id/textview_date"
