@@ -7,6 +7,17 @@ import java.util.Locale;
 
 public class Utilities {
 
+    private static Calendar cal = Calendar.getInstance(Locale.getDefault());
+    public static int DAY = cal.get(Calendar.DAY_OF_MONTH);
+    public static int MONTH = cal.get(Calendar.MONTH);
+    public static int YEAR = cal.get(Calendar.YEAR);
+    public static int HOUR = cal.get(Calendar.HOUR_OF_DAY);
+    public static int MINUTE = cal.get(Calendar.MINUTE);
+
+    public static int LANGUAGE = 2;
+    public static boolean AUTOSTATE = true;
+    public static String CALLER = null;
+
     public static String calcWeather() {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         int month = cal.get(Calendar.MONTH);
@@ -16,17 +27,11 @@ public class Utilities {
     }
 
     public static String calcTime() {
-        Calendar cal = Calendar.getInstance(Locale.getDefault());
-        int h = cal.get(Calendar.HOUR_OF_DAY);
-        int m = cal.get(Calendar.MINUTE);
-        return addZeroInBeginning(h) + ":" + addZeroInBeginning(m);
+        return addZeroInBeginning(HOUR) + ":" + addZeroInBeginning(MINUTE);
     }
 
     public static String calcDate() {
-        Calendar cal = Calendar.getInstance(Locale.getDefault());
-        int d = cal.get(Calendar.DAY_OF_MONTH);
-        int m = cal.get(Calendar.MONTH);
-        return addZeroInBeginning(d) + " " + (new DateFormatSymbols().getMonths()[m]).substring(0, 3).toUpperCase();
+        return addZeroInBeginning(DAY) + " " + (new DateFormatSymbols().getMonths()[MONTH]).substring(0, 3).toUpperCase();
     }
 
     public static int clampIntToLimits (int x, int min, int max) {

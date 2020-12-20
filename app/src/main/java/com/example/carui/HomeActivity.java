@@ -21,7 +21,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         weatherTextView = (TextView)findViewById(R.id.textview_weather);
         weatherTextView.setText(Utilities.calcWeather());
@@ -49,10 +48,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(HomeActivity.this, GPSActivity.class));
         else if (v == radioButton)
             startActivity(new Intent(HomeActivity.this, RadioActivity.class));
-        else if (v == phoneButton) {
-            Intent intent = new Intent(HomeActivity.this, PhoneActivity.class);
-            startActivity(intent);
-        }
+        else if (v == phoneButton)
+            startActivity(new Intent(HomeActivity.this, PhoneActivity.class));
         else if (v == settingsButton)
             startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
     }

@@ -29,7 +29,6 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calling);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         answerLayout = (LinearLayout)findViewById(R.id.linearlayout_answercall);
         holdLayout = (LinearLayout)findViewById(R.id.linearlayout_holdcall);
@@ -64,9 +63,15 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
     protected void onPause() {super.onPause();}
 
     @Override
+    public void onBackPressed() {
+        startActivity(new Intent(CallingActivity.this, HomeActivity.class));
+        finish();
+    }
+
+    @Override
     public void onClick(View v) {
         if (v == homeButton || v == declineBtn)
-            startActivity(new Intent(CallingActivity.this, HomeActivity.class));
+            onBackPressed();
         else if (v == answerBtn) {
             setAnswerVisibility(false);
         }

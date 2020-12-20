@@ -27,7 +27,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     private ImageButton homeButton;
 
-    private boolean autoState = true;
+    private boolean autoState = Utilities.AUTOSTATE;
     private Button autoOnButton, autoOffButton;
 
     private int l = 2;
@@ -43,13 +43,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     private TextView hourTextView, minuteTextView;
     private ImageView hourDownButton, minuteDownButton;
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         homeButton = (ImageButton)findViewById(R.id.home_btn);
         homeButton.setOnClickListener(this);
@@ -58,21 +55,27 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         updateAutoState();
         initializeLanguageViews();
         initializeDateTimeViews();
-
     }
 
     @Override
     protected void onPause() {super.onPause();}
 
     @Override
+    public void onBackPressed() {
+        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
+        finish();
+    }
+
+    @Override
     public void onClick(View v) {
         if (v == homeButton)
-            startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
+            onBackPressed();
 
         else if (v == languageUpImageView || v == languageDownImageView) {
             if (v == languageUpImageView) l--;
             else l++;
-            languageMiddleImageView.setText(languageList[Utilities.clampIntToLimits(l, 0, languageList.length-1)]);
+            Utilities.LANGUAGE = l;
+            languageMiddleImageView.setText(languageList[Utilities.clampIntToLimits(Utilities.LANGUAGE, 0, languageList.length-1)]);
         }
 
         handleDateTimeViews(v);
@@ -93,7 +96,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         languageUpImageView = (ImageView)findViewById(R.id.languageup_btn);
         languageUpImageView.setOnClickListener(this);
         languageMiddleImageView = (TextView)findViewById(R.id.languagemiddle_textview);
-        languageMiddleImageView.setText(languageList[l]);
+        languageMiddleImageView.setText(languageList[Utilities.LANGUAGE]);
         languageDownImageView = (ImageView)findViewById(R.id.languagedown_btn);
         languageDownImageView.setOnClickListener(this);
     }
@@ -130,12 +133,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         minuteDownButton = (ImageView)findViewById(R.id.minutedown_btn);
         minuteDownButton.setOnClickListener(this);
 
-        Calendar cal = Calendar.getInstance(Locale.getDefault());
-        day = cal.get(Calendar.DAY_OF_MONTH);
-        month = cal.get(Calendar.MONTH);
-        year = cal.get(Calendar.YEAR);
-        hour = cal.get(Calendar.HOUR_OF_DAY);
-        minute = cal.get(Calendar.MINUTE);
+        day = Utilities.DAY;
+        month = Utilities.MONTH;
+        year = Utilities.YEAR;
+        hour = Utilities.HOUR;
+        minute = Utilities.MINUTE;
         updateDateTimeText();
     }
 
@@ -171,26 +173,32 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void updateDateTimeText() {
-        dayTextView.setText(Utilities.addZeroInBeginning(day));
-        monthTextView.setText((new DateFormatSymbols().getMonths()[month]).substring(0, 3).toUpperCase());
-        yearTextView.setText(String.valueOf(year));
+        Utilities.DAY = day;
+        Utilities.MONTH = month;
+        Utilities.YEAR = year;
+        Utilities.HOUR = hour;
+        Utilities.MINUTE = minute;
 
-        hourTextView.setText(Utilities.addZeroInBeginning(hour));
-        minuteTextView.setText(Utilities.addZeroInBeginning(minute));
+        dayTextView.setText(Utilities.addZeroInBeginning(Utilities.DAY));
+        monthTextView.setText((new DateFormatSymbols().getMonths()[Utilities.MONTH]).substring(0, 3).toUpperCase());
+        yearTextView.setText(String.valueOf(Utilities.YEAR));
+        hourTextView.setText(Utilities.addZeroInBeginning(Utilities.HOUR));
+        minuteTextView.setText(Utilities.addZeroInBeginning(Utilities.MINUTE));
     }
 
     @SuppressLint("ResourceType")
     private void updateAutoState() {
-        if (autoState) {
+        Utilities.AUTOSTATE = autoState;
+        if (Utilities.AUTOSTATE) {
             autoOnButton.setBackgroundResource(R.color.white);
-            autoOnButton.setTextColor(R.color.teal);
+            autoOnButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, R.color.teal));
             autoOffButton.setBackgroundResource(R.layout.border_rectangle);
-            autoOffButton.setTextColor(R.color.white);
+            autoOffButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, R.color.white));
         } else {
             autoOffButton.setBackgroundResource(R.color.white);
-            autoOffButton.setTextColor(R.color.teal);
+            autoOffButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, R.color.teal));
             autoOnButton.setBackgroundResource(R.layout.border_rectangle);
-            autoOnButton.setTextColor(R.color.white);
+            autoOnButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, R.color.white));
         }
     }
 }

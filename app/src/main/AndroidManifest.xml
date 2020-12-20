@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.carui">
 
     <application
@@ -9,18 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity"> android:screenOrientation="landscape" </activity>
-        <activity android:name=".GPSActivity"> android:screenOrientation="landscape" </activity>
-        <activity android:name=".RadioActivity"> android:screenOrientation="landscape" </activity>
-        <activity android:name=".PhoneActivity"> android:screenOrientation="landscape" </activity>
-        <activity android:name=".CallingActivity"> android:screenOrientation="landscape" </activity>
-        <activity android:name=".SettingsActivity"> android:screenOrientation="landscape" </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".HomeActivity" android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".GPSActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".RadioActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".PhoneActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".CallingActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".SettingsActivity" android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

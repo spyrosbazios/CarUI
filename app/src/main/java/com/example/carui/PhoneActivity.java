@@ -33,7 +33,6 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         homeButton = (ImageButton)findViewById(R.id.home_btn);
         homeButton.setOnClickListener(this);
@@ -66,9 +65,15 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
     protected void onPause() {super.onPause();}
 
     @Override
+    public void onBackPressed() {
+        startActivity(new Intent(PhoneActivity.this, HomeActivity.class));
+        finish();
+    }
+
+    @Override
     public void onClick(View v) {
         if (v == homeButton)
-            startActivity(new Intent(PhoneActivity.this, HomeActivity.class));
+            onBackPressed();
         else if (v == playButton) {
             //playButton.setBackgroundResource(R.drawable.musicpause);
         }

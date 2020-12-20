@@ -33,7 +33,6 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         homeButton = (ImageButton)findViewById(R.id.home_btn);
         homeButton.setOnClickListener(this);
@@ -84,13 +83,19 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
     protected void onPause() {super.onPause();}
 
     @Override
+    public void onBackPressed() {
+        startActivity(new Intent(RadioActivity.this, HomeActivity.class));
+        finish();
+    }
+
+    @Override
     public void onClick(View v) {
         if (v == homeButton)
-            startActivity(new Intent(RadioActivity.this, HomeActivity.class));
+            onBackPressed();
         else if (v == previousButton || v == nextButton) {
             if (v == previousButton) i--;
             else i++;
-            radioButton.setText(stationArray[Utilities.clampIntToLimits(i, 0, stationArray.length)]);
+            radioButton.setText(stationArray[Utilities.clampIntToLimits(i, 0, stationArray.length-1)]);
         } else {
             outerloop: for (int i = 1; i < 4; i ++) {
                 for (int j = 0; j < 2; j++) {
@@ -99,6 +104,7 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
                             if (!favourites.contains(String.valueOf(radioButton.getText()))) {
                                 ((Button) v).setText(radioButton.getText());
                                 favourites.add(String.valueOf(radioButton.getText()));
+                                Toast.makeText(RadioActivity.this, radioButton.getText() + " added in favourites", Toast.LENGTH_SHORT).show();
                             }
                             else Toast.makeText(RadioActivity.this, radioButton.getText() + " is already in favourites", Toast.LENGTH_SHORT).show();
                         }
