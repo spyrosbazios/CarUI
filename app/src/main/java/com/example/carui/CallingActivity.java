@@ -24,6 +24,7 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout answerLayout, holdLayout;
     private ImageButton homeButton, answerBtn, declineBtn;
     private TextView answerTextView, holdTextView, declineTextView, callerTextView, isCallingTextView;
+    private boolean updateUI = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +51,25 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
 
         if (Utilities.CALLER != null) {
             callerTextView.setText(Utilities.CALLER);
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (updateUI) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            @SuppressLint({"SetText|18n", "SetTextI18n"})
+                            public void run() {
+                                int m = (int) ((Utilities.getCallDuration() / (1000 * 60)) % 60);
+                                int s = (int) (Utilities.getCallDuration() / 1000) % 60;
+                                isCallingTextView.setText(Utilities.addZeroInBeginning(m) + ":" + Utilities.addZeroInBeginning(s));
+                            }
+                        });
+                        try {Thread.sleep(1000);}
+                        catch (InterruptedException e) {e.printStackTrace();}
+                    }
+                }
+            });
+            t.start();
             setAnswerVisibility(false);
         }
         else {
@@ -63,6 +83,7 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() {
+        updateUI = false;
         startActivity(new Intent(CallingActivity.this, HomeActivity.class));
         finish();
     }

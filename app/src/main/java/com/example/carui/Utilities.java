@@ -2,10 +2,8 @@ package com.example.carui;
 
 import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.Random;
 
 public class Utilities {
 
@@ -52,4 +50,21 @@ public class Utilities {
     public static String addZeroInBeginning (int x) {
         return x < 10 ? "0"+x : String.valueOf(x);
     }
+
+    private static long tms;
+    public static void startTimer() {
+        final long ct = System.currentTimeMillis();
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(CALLER != null) {
+                    tms = System.currentTimeMillis() - ct;
+                    try {Thread.sleep(1000);}
+                    catch (InterruptedException e) {e.printStackTrace();}
+                }
+            }
+        });
+        t.start();
+    }
+    public static long getCallDuration() {return tms;}
 }

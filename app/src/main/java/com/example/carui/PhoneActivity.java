@@ -64,6 +64,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Utilities.CALLER = contactAdapter.getItem(position);
+                Utilities.startTimer();
                 startActivity(new Intent(PhoneActivity.this, CallingActivity.class));
             }
         });
