@@ -88,9 +88,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             languageMiddleImageView.setText(languageList[Utilities.clampIntToLimits(l, 0, languageList.length-1)]);
         }
         else if (v == brightnessLeftButton)
-            brightnessSeekBar.setProgress(brightnessSeekBar.getProgress() - 10 >= 0 ? brightnessSeekBar.getProgress() - 10 : 0);
+            brightnessSeekBar.setProgress(Math.max(brightnessSeekBar.getProgress() - 10, 0));
         else if (v == brightnessRightButton)
-            brightnessSeekBar.setProgress(brightnessSeekBar.getProgress() + 10 <= 100 ? brightnessSeekBar.getProgress() + 10 : brightnessSeekBar.getMax());
+            brightnessSeekBar.setProgress(Math.min(brightnessSeekBar.getProgress() + 10, brightnessSeekBar.getMax()));
 
         handleDateTimeViews(v);
 

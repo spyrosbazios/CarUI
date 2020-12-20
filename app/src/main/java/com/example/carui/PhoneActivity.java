@@ -70,6 +70,8 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Utilities.CALLER = contactAdapter.getItem(position);
+                Utilities.PLAY_STATE = playState;
+                Utilities.MUSIC_PROGRESS = musicSeekBar.getProgress();
                 Utilities.startTimer();
                 startActivity(new Intent(PhoneActivity.this, CallingActivity.class));
             }
@@ -99,8 +101,8 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
                 playButton.setBackgroundResource(R.drawable.holdcall);
         }
         else if (v == musicLeftButton)
-            musicSeekBar.setProgress(musicSeekBar.getProgress() - 10 >= 0 ? musicSeekBar.getProgress() - 10 : 0);
+            musicSeekBar.setProgress(Math.max(musicSeekBar.getProgress() - 10, 0));
         else if (v == musicRightButton)
-            musicSeekBar.setProgress(musicSeekBar.getProgress() + 10 <= 100 ? musicSeekBar.getProgress() + 10 : musicSeekBar.getMax());
+            musicSeekBar.setProgress(Math.min(musicSeekBar.getProgress() + 10, musicSeekBar.getMax()));
     }
 }
