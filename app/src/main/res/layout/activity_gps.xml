@@ -1,6 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/mapbackground_img"
+        android:background="@drawable/map"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="true" />
+
+    <LinearLayout
+        android:id="@+id/linearlayout_bar"
+        android:background="@color/teal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/more_btn"
+            android:background="@drawable/morebutton"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"/>
+
+        <EditText
+            android:id="@+id/searchaddress_edittext"
+            android:inputType="textCapCharacters"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="9"
+            android:layout_gravity="center"/>
+
+        <ImageButton
+            android:id="@+id/search_btn"
+            android:background="@drawable/searchbutton"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_favourites"
+        android:background="@drawable/floatingpanel"
+        app:layout_constraintStart_toStartOf="@id/linearlayout_bar"
+        app:layout_constraintBottom_toTopOf="@id/linearlayout_bar"
+        android:layout_width="225dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/favourites1_btn"
+            android:background="@null"
+            android:text="HOME: ATHINODOROU 28"
+            android:textColor="@color/teal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/favourites2_btn"
+            android:background="@null"
+            android:text="ADD"
+            android:textColor="@color/teal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/favourites3_btn"
+            android:background="@null"
+            android:text="ADD"
+            android:textColor="@color/teal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/favourites4_btn"
+            android:background="@null"
+            android:text="ADD"
+            android:textColor="@color/teal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/favourites5_btn"
+            android:background="@null"
+            android:text="ADD"
+            android:textColor="@color/teal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_newfavourite"
+        android:background="@color/teal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_btn"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="70dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearlayout_newloc"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/newloc_textview"
+                android:text="LOCATION:"
+                android:textColor="@color/white"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:gravity="center"/>
+            <EditText
+                android:id="@+id/newloc_edittext"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearlayout_newaddress"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/newaddress_textview"
+                android:text="ADDRESS:"
+                android:textColor="@color/white"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:gravity="center"/>
+            <EditText
+                android:id="@+id/newaddress_edittext"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearlayout_confirmnew"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/newcancel_btn"
+                android:background="@null"
+                android:text="CANCEL"
+                android:textColor="@color/white"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/newadd_btn"
+                android:background="@null"
+                android:text="ADD"
+                android:textColor="@color/white"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/home_btn"
+        android:background="@drawable/awsomehomebutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

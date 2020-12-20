@@ -18,7 +18,7 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
     private int rl;
     private ImageButton homeButton, previousButton, nextButton;
     private Button radioButton;
-    private TextView[][]  stationTextView = new TextView[4][2];
+    private TextView[][] stationButton = new TextView[4][2];
     private String[] stationArray = {"88.9", "89.8", "91.6", "92.3", "94.6", "97.5", "97.8", "101.3", "106.2", "107.0"};
     private ArrayList<String> favourites = new ArrayList<>();
 
@@ -38,31 +38,31 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
         nextButton = (ImageButton)findViewById(R.id.next_btn);
         nextButton.setOnClickListener(this);
 
-        stationTextView[0][0] = (Button)findViewById(R.id.leftstation1_textview);
-        stationTextView[1][0] = (Button)findViewById(R.id.leftstation2_textview);
-        stationTextView[2][0] = (Button)findViewById(R.id.leftstation3_textview);
-        stationTextView[3][0] = (Button)findViewById(R.id.leftstation4_textview);
-        stationTextView[0][1] = (Button)findViewById(R.id.rightstation1_textview);
-        stationTextView[1][1] = (Button)findViewById(R.id.rightstation2_textview);
-        stationTextView[2][1] = (Button)findViewById(R.id.rightstation3_textview);
-        stationTextView[3][1] = (Button)findViewById(R.id.rightstation4_textview);
+        stationButton[0][0] = (Button)findViewById(R.id.leftstation1_textview);
+        stationButton[1][0] = (Button)findViewById(R.id.leftstation2_textview);
+        stationButton[2][0] = (Button)findViewById(R.id.leftstation3_textview);
+        stationButton[3][0] = (Button)findViewById(R.id.leftstation4_textview);
+        stationButton[0][1] = (Button)findViewById(R.id.rightstation1_textview);
+        stationButton[1][1] = (Button)findViewById(R.id.rightstation2_textview);
+        stationButton[2][1] = (Button)findViewById(R.id.rightstation3_textview);
+        stationButton[3][1] = (Button)findViewById(R.id.rightstation4_textview);
         for (int i = 1; i < 4; i ++) {
             for (int j = 0; j < 2; j++) {
-                stationTextView[i][j].setOnClickListener(this);
-                stationTextView[i][j].setOnLongClickListener(this);
+                stationButton[i][j].setOnClickListener(this);
+                stationButton[i][j].setOnLongClickListener(this);
             }
         }
 
-        stationTextView[0][0].setText(Utilities.calcWeather());
-        stationTextView[0][1].setText(Utilities.calcTime());
+        stationButton[0][0].setText(Utilities.calcWeather());
+        stationButton[0][1].setText(Utilities.calcTime());
 
         rl = Utilities.RADIOLIVE;
         radioButton.setText(stationArray[rl]);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
-                stationTextView[i+1][j].setText(Utilities.FAVOURITES[i][j]);
-                if (!Utilities.FAVOURITES[i][j].equals("+"))
-                    favourites.add(Utilities.FAVOURITES[i][j]);
+                stationButton[i+1][j].setText(Utilities.STATION_FAVOURITES[i][j]);
+                if (!Utilities.STATION_FAVOURITES[i][j].equals("+"))
+                    favourites.add(Utilities.STATION_FAVOURITES[i][j]);
             }
         }
 
@@ -89,7 +89,7 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
         }
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
-                Utilities.FAVOURITES[i][j] = String.valueOf(stationTextView[i+1][j].getText());
+                Utilities.STATION_FAVOURITES[i][j] = String.valueOf(stationButton[i+1][j].getText());
             }
         }
         startActivity(new Intent(RadioActivity.this, HomeActivity.class));
@@ -107,7 +107,7 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
         } else {
             outerloop: for (int i = 1; i < 4; i ++) {
                 for (int j = 0; j < 2; j++) {
-                    if (v == stationTextView[i][j]) {
+                    if (v == stationButton[i][j]) {
                         if (((Button)v).getText().equals("+")) {
                             if (!favourites.contains(String.valueOf(radioButton.getText()))) {
                                 ((Button)v).setText(radioButton.getText());
@@ -128,11 +128,11 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
     public boolean onLongClick(View v) {
         outerloop: for (int i = 1; i < 4; i ++) {
             for (int j = 0; j < 2; j++) {
-                if (v == stationTextView[i][j]) {
+                if (v == stationButton[i][j]) {
                     if (!(((Button)v).getText().equals("+"))) {
                         favourites.remove(((Button)v).getText());
+                        Toast.makeText(RadioActivity.this, ((Button)v).getText() + " removed from favourites", Toast.LENGTH_SHORT).show();
                         ((Button)v).setText("+");
-                        Toast.makeText(RadioActivity.this, radioButton.getText() + " removed from favourites", Toast.LENGTH_SHORT).show();
                     }
                     break outerloop;
                 }

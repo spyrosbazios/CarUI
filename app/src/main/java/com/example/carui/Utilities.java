@@ -20,7 +20,8 @@ public class Utilities {
     public static boolean AUTOSTATE = true;
     public static String CALLER = null;
     public static int RADIOLIVE = 2;
-    public static String[][] FAVOURITES = {{"+", "+"}, {"+", "+"}, {"+", "+"}};
+    public static String[][] STATION_FAVOURITES = {{"+", "+"}, {"+", "+"}, {"+", "+"}};
+    public static String[] GPS_FAVOURITES = {"ADD", "ADD", "ADD", "ADD", "ADD"};
 
     public static String calcWeather() {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
