@@ -25,6 +25,7 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
     private ImageButton homeButton, answerBtn, declineBtn;
     private TextView answerTextView, holdTextView, declineTextView, callerTextView, isCallingTextView;
     private boolean updateUI = true;
+    private boolean holdState = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
                 @Override
                 public void run() {
                     while (updateUI) {
+                        while(holdState);
                         runOnUiThread(new Runnable() {
                             @Override
                             @SuppressLint({"SetText|18n", "SetTextI18n"})
@@ -97,7 +99,15 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(CallingActivity.this, PhoneActivity.class));
         }
         else if (v == answerBtn) {
-            setAnswerVisibility(false);
+            if (Utilities.CALLER != null) {
+                holdState = !holdState;
+                if (holdState) {
+                    isCallingTextView.setText("On Hold");
+                    holdTextView.setText("Resume");
+                }
+                else holdTextView.setText("Hold");
+            }
+            else setAnswerVisibility(false);
         }
     }
 
