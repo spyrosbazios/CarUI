@@ -46,15 +46,41 @@
                 android:id="@+id/brightempty1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.8"/>
-            <ImageView
-                android:id="@+id/brightnessbar_img"
-                android:background="@drawable/musicbar"
-                android:layout_width="200dp"
+                android:layout_weight="1"/>
+            <LinearLayout
+                android:id="@+id/linearlayout_brightnessbar"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.2"
-                android:rotation="1.1"
-                android:layout_gravity="center"/>
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/brightnessleft_btn"
+                    android:background="@android:drawable/ic_media_play"
+                    android:clickable="true"
+                    android:rotation="180"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <SeekBar
+                    android:id="@+id/brightnessbar_seekbar"
+                    android:thumbTint="@color/white"
+                    android:progressTint="@color/white"
+                    android:progressBackgroundTint="@color/white"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="4"
+                    android:layout_gravity="center"/>
+                <ImageView
+                    android:id="@+id/brightnessright_btn"
+                    android:background="@android:drawable/ic_media_play"
+                    android:clickable="true"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
             <TextView
                 android:id="@+id/brightempty2"
                 android:layout_width="match_parent"

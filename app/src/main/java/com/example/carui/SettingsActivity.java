@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -27,6 +29,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     private ImageButton homeButton;
 
+    private ImageView brightnessLeftButton, brightnessRightButton;
+    private SeekBar brightnessSeekBar;
     private boolean autoState;
     private Button autoOnButton, autoOffButton;
 
@@ -61,6 +65,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
+        Utilities.BRIGHTNESS_PROGRESS = brightnessSeekBar.getProgress();
         Utilities.AUTOSTATE = autoState;
         Utilities.LANGUAGE = l;
         Utilities.DAY = day;
@@ -82,6 +87,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             else l++;
             languageMiddleImageView.setText(languageList[Utilities.clampIntToLimits(l, 0, languageList.length-1)]);
         }
+        else if (v == brightnessLeftButton)
+            brightnessSeekBar.setProgress(brightnessSeekBar.getProgress() - 10 >= 0 ? brightnessSeekBar.getProgress() - 10 : 0);
+        else if (v == brightnessRightButton)
+            brightnessSeekBar.setProgress(brightnessSeekBar.getProgress() + 10 <= 100 ? brightnessSeekBar.getProgress() + 10 : brightnessSeekBar.getMax());
 
         handleDateTimeViews(v);
 
@@ -91,12 +100,20 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initializeBrightnessViews() {
+        brightnessLeftButton = (ImageView)findViewById(R.id.brightnessleft_btn);
+        brightnessLeftButton.setOnClickListener(this);
+        brightnessSeekBar = (SeekBar)findViewById(R.id.brightnessbar_seekbar);
+        brightnessSeekBar.setOnClickListener(this);
+        brightnessRightButton = (ImageView)findViewById(R.id.brightnessright_btn);
+        brightnessRightButton.setOnClickListener(this);
         autoOnButton = (Button)findViewById(R.id.autoon_btn);
         autoOnButton.setOnClickListener(this);
         autoOffButton = (Button)findViewById(R.id.autooff_btn);
         autoOffButton.setOnClickListener(this);
 
         autoState = Utilities.AUTOSTATE;
+        brightnessSeekBar.setMax(100);
+        brightnessSeekBar.setProgress(Utilities.BRIGHTNESS_PROGRESS);
         updateAutoState();
     }
 

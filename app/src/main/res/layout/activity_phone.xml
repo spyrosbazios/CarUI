@@ -89,14 +89,15 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="7"/>
-            <ImageView
-                android:id="@+id/musicbar_img"
-                android:background="@drawable/musicbar"
+            <SeekBar
+                android:id="@+id/musicbar_seekbar"
+                android:thumbTint="@color/white"
+                android:progressTint="@color/white"
+                android:progressBackgroundTint="@color/white"
                 android:layout_width="250dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:layout_marginTop="0dp"
-                android:rotation="1.1"
                 android:layout_gravity="center"/>
             <LinearLayout
                 android:id="@+id/linearlayout_musicbuttons"

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -24,6 +25,8 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
     private ImageButton homeButton, playButton;
     private ListView contactListView;
     private String[] contactList = {"Spyros", "Christos", "Manos", "Nantia", "Ion Androutsopoulos", "Chalkidis", "Dio", "Chara", "George"};
+    private SeekBar musicSeekBar;
+    private boolean playState;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -36,6 +39,15 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
 
         playButton = (ImageButton)findViewById(R.id.musicplay_btn);
         playButton.setOnClickListener(this);
+        playState = Utilities.PLAY_STATE;
+        if (playState)
+            playButton.setBackgroundResource(R.drawable.musicplay);
+        else
+            playButton.setBackgroundResource(R.drawable.holdcall);
+        musicSeekBar = (SeekBar)findViewById(R.id.musicbar_seekbar);
+        musicSeekBar.setOnClickListener(this);
+        musicSeekBar.setMax(100);
+        musicSeekBar.setProgress(Utilities.MUSIC_PROGRESS);
 
         contactListView = (ListView)findViewById(R.id.contacts_listview);
         final ArrayAdapter<String> contactAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, contactList){
@@ -62,6 +74,8 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onBackPressed() {
+        Utilities.PLAY_STATE = playState;
+        Utilities.MUSIC_PROGRESS = musicSeekBar.getProgress();
         startActivity(new Intent(PhoneActivity.this, HomeActivity.class));
         finish();
     }
@@ -71,7 +85,11 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
         if (v == homeButton)
             onBackPressed();
         else if (v == playButton) {
-            //playButton.setBackgroundResource(R.drawable.musicpause);
+            playState = !playState;
+            if (playState)
+                playButton.setBackgroundResource(R.drawable.musicplay);
+            else
+                playButton.setBackgroundResource(R.drawable.holdcall);
         }
     }
 }
