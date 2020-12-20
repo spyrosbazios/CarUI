@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
@@ -22,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class PhoneActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private ImageView musicLeftButton, musicRightButton;
     private ImageButton homeButton, playButton;
     private ListView contactListView;
     private String[] contactList = {"Spyros", "Christos", "Manos", "Nantia", "Ion Androutsopoulos", "Chalkidis", "Dio", "Chara", "George"};
@@ -37,6 +39,10 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
         homeButton = (ImageButton)findViewById(R.id.home_btn);
         homeButton.setOnClickListener(this);
 
+        musicLeftButton = (ImageView)findViewById(R.id.musicprevious_img);
+        musicLeftButton.setOnClickListener(this);
+        musicRightButton = (ImageView)findViewById(R.id.musicnext_img);
+        musicRightButton.setOnClickListener(this);
         playButton = (ImageButton)findViewById(R.id.musicplay_btn);
         playButton.setOnClickListener(this);
         playState = Utilities.PLAY_STATE;
@@ -92,5 +98,9 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
             else
                 playButton.setBackgroundResource(R.drawable.holdcall);
         }
+        else if (v == musicLeftButton)
+            musicSeekBar.setProgress(musicSeekBar.getProgress() - 10 >= 0 ? musicSeekBar.getProgress() - 10 : 0);
+        else if (v == musicRightButton)
+            musicSeekBar.setProgress(musicSeekBar.getProgress() + 10 <= 100 ? musicSeekBar.getProgress() + 10 : musicSeekBar.getMax());
     }
 }
