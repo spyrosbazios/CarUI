@@ -23,10 +23,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
 
     private ImageButton homeButton, playButton;
     private ListView contactListView;
-    private String[] contactList = {"Spyros", "Christos", "Manos", "Nantia", "Ion Androutsopoulos", "Chalkidis", "Dio", "Chara"};
-    //private long startTime;
-    //private Handler timerHandler;
-    //private Runnable timerRunnable;
+    private String[] contactList = {"Spyros", "Christos", "Manos", "Nantia", "Ion Androutsopoulos", "Chalkidis", "Dio", "Chara", "George"};
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -54,9 +51,8 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(PhoneActivity.this, CallingActivity.class);
-                intent.putExtra("Caller", contactAdapter.getItem(position));
-                startActivity(intent);
+                Utilities.CALLER = contactAdapter.getItem(position);
+                startActivity(new Intent(PhoneActivity.this, CallingActivity.class));
             }
         });
     }

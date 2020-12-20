@@ -27,10 +27,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     private ImageButton homeButton;
 
-    private boolean autoState = Utilities.AUTOSTATE;
+    private boolean autoState;
     private Button autoOnButton, autoOffButton;
 
-    private int l = 2;
+    private int l;
     private ImageView languageUpImageView, languageDownImageView;
     private TextView languageMiddleImageView;
     private final String[] languageList = {"Arabic", "Chinese", "English", "French", "German", "Japanese", "Portuguese", "Russian", "Spanish"};
@@ -52,7 +52,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         homeButton.setOnClickListener(this);
 
         initializeBrightnessViews();
-        updateAutoState();
         initializeLanguageViews();
         initializeDateTimeViews();
     }
@@ -62,6 +61,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
+        Utilities.AUTOSTATE = autoState;
+        Utilities.LANGUAGE = l;
+        Utilities.DAY = day;
+        Utilities.MONTH = month;
+        Utilities.YEAR = year;
+        Utilities.HOUR = hour;
+        Utilities.MINUTE = minute;
         startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
         finish();
     }
@@ -74,8 +80,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         else if (v == languageUpImageView || v == languageDownImageView) {
             if (v == languageUpImageView) l--;
             else l++;
-            Utilities.LANGUAGE = l;
-            languageMiddleImageView.setText(languageList[Utilities.clampIntToLimits(Utilities.LANGUAGE, 0, languageList.length-1)]);
+            languageMiddleImageView.setText(languageList[Utilities.clampIntToLimits(l, 0, languageList.length-1)]);
         }
 
         handleDateTimeViews(v);
@@ -90,15 +95,20 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         autoOnButton.setOnClickListener(this);
         autoOffButton = (Button)findViewById(R.id.autooff_btn);
         autoOffButton.setOnClickListener(this);
+
+        autoState = Utilities.AUTOSTATE;
+        updateAutoState();
     }
 
     private void initializeLanguageViews() {
         languageUpImageView = (ImageView)findViewById(R.id.languageup_btn);
         languageUpImageView.setOnClickListener(this);
         languageMiddleImageView = (TextView)findViewById(R.id.languagemiddle_textview);
-        languageMiddleImageView.setText(languageList[Utilities.LANGUAGE]);
         languageDownImageView = (ImageView)findViewById(R.id.languagedown_btn);
         languageDownImageView.setOnClickListener(this);
+
+        l = Utilities.LANGUAGE;
+        languageMiddleImageView.setText(languageList[l]);
     }
 
     private void initializeDateTimeViews() {
@@ -173,23 +183,16 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void updateDateTimeText() {
-        Utilities.DAY = day;
-        Utilities.MONTH = month;
-        Utilities.YEAR = year;
-        Utilities.HOUR = hour;
-        Utilities.MINUTE = minute;
-
-        dayTextView.setText(Utilities.addZeroInBeginning(Utilities.DAY));
-        monthTextView.setText((new DateFormatSymbols().getMonths()[Utilities.MONTH]).substring(0, 3).toUpperCase());
-        yearTextView.setText(String.valueOf(Utilities.YEAR));
-        hourTextView.setText(Utilities.addZeroInBeginning(Utilities.HOUR));
-        minuteTextView.setText(Utilities.addZeroInBeginning(Utilities.MINUTE));
+        dayTextView.setText(Utilities.addZeroInBeginning(day));
+        monthTextView.setText((new DateFormatSymbols().getMonths()[month]).substring(0, 3).toUpperCase());
+        yearTextView.setText(String.valueOf(year));
+        hourTextView.setText(Utilities.addZeroInBeginning(hour));
+        minuteTextView.setText(Utilities.addZeroInBeginning(minute));
     }
 
     @SuppressLint("ResourceType")
     private void updateAutoState() {
-        Utilities.AUTOSTATE = autoState;
-        if (Utilities.AUTOSTATE) {
+        if (autoState) {
             autoOnButton.setBackgroundResource(R.color.white);
             autoOnButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, R.color.teal));
             autoOffButton.setBackgroundResource(R.layout.border_rectangle);

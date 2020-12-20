@@ -48,8 +48,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(HomeActivity.this, GPSActivity.class));
         else if (v == radioButton)
             startActivity(new Intent(HomeActivity.this, RadioActivity.class));
-        else if (v == phoneButton)
-            startActivity(new Intent(HomeActivity.this, PhoneActivity.class));
+        else if (v == phoneButton) {
+            if (Utilities.CALLER == null)
+                startActivity(new Intent(HomeActivity.this, PhoneActivity.class));
+            else
+                startActivity(new Intent(HomeActivity.this, CallingActivity.class));
+        }
         else if (v == settingsButton)
             startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
     }

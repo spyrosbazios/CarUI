@@ -48,9 +48,8 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
         callerTextView = (TextView)findViewById(R.id.callername_textview);
         isCallingTextView = (TextView)findViewById(R.id.iscalling_textview);
 
-        String callerIntent = getIntent().getStringExtra("Caller");
-        if (callerIntent != null) {
-            callerTextView.setText(callerIntent);
+        if (Utilities.CALLER != null) {
+            callerTextView.setText(Utilities.CALLER);
             setAnswerVisibility(false);
         }
         else {
@@ -70,8 +69,12 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if (v == homeButton || v == declineBtn)
+        if (v == homeButton)
             onBackPressed();
+        else if (v == declineBtn) {
+            Utilities.CALLER = null;
+            startActivity(new Intent(CallingActivity.this, PhoneActivity.class));
+        }
         else if (v == answerBtn) {
             setAnswerVisibility(false);
         }

@@ -2,8 +2,10 @@ package com.example.carui;
 
 import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Random;
 
 public class Utilities {
 
@@ -17,6 +19,8 @@ public class Utilities {
     public static int LANGUAGE = 2;
     public static boolean AUTOSTATE = true;
     public static String CALLER = null;
+    public static int RADIOLIVE = 2;
+    public static String[][] FAVOURITES = {{"+", "+"}, {"+", "+"}, {"+", "+"}};
 
     public static String calcWeather() {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
@@ -35,10 +39,10 @@ public class Utilities {
     }
 
     public static int clampIntToLimits (int x, int min, int max) {
-        if (x < min) return max;
+        /*if (x < min) return max;
         else if (x > max) return min;
-        return x;
-        //return Math.min(Math.max(x, min), max);
+        return x;*/
+        return Math.min(Math.max(x, min), max);
     }
 
     public static String addZeroInBeginning (int x) {
