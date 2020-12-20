@@ -212,12 +212,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         if (autoState) {
             autoOnButton.setBackgroundResource(R.color.white);
             autoOnButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, R.color.teal));
-            autoOffButton.setBackgroundResource(R.layout.border_rectangle);
+            autoOffButton.setBackgroundResource(R.drawable.border_rectangle);
             autoOffButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, R.color.white));
         } else {
             autoOffButton.setBackgroundResource(R.color.white);
             autoOffButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, R.color.teal));
-            autoOnButton.setBackgroundResource(R.layout.border_rectangle);
+            autoOnButton.setBackgroundResource(R.drawable.border_rectangle);
             autoOnButton.setTextColor(ContextCompat.getColor(SettingsActivity.this, R.color.white));
         }
     }

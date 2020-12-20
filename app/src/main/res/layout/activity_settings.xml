@@ -106,7 +106,7 @@
                     android:gravity="center"/>
                 <Button
                     android:id="@+id/autoon_btn"
-                    android:background="@layout/border_rectangle"
+                    android:background="@drawable/border_rectangle"
                     android:text="ON"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -116,7 +116,7 @@
                     android:gravity="center"/>
                 <Button
                     android:id="@+id/autooff_btn"
-                    android:background="@layout/border_rectangle"
+                    android:background="@drawable/border_rectangle"
                     android:text="OFF"
                     android:textColor="@color/white"
                     android:textSize="20sp"

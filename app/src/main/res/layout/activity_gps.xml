@@ -37,6 +37,7 @@
         <EditText
             android:id="@+id/searchaddress_edittext"
             android:inputType="textCapCharacters"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:layout_width="0dp"
@@ -77,7 +78,7 @@
             android:layout_weight="1"/>
         <Button
             android:id="@+id/favourites2_btn"
-            android:background="@null"
+            android:background="@drawable/border_add"
             android:text="ADD"
             android:textColor="@color/teal"
             android:layout_width="match_parent"
@@ -93,7 +94,7 @@
             android:layout_weight="1"/>
         <Button
             android:id="@+id/favourites4_btn"
-            android:background="@null"
+            android:background="@drawable/border_add"
             android:text="ADD"
             android:textColor="@color/teal"
             android:layout_width="match_parent"
@@ -138,11 +139,12 @@
                 android:gravity="center"/>
             <EditText
                 android:id="@+id/newloc_edittext"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2.5"
+                android:layout_weight="2"
                 android:gravity="center"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"/>
@@ -165,11 +167,12 @@
                 android:gravity="center"/>
             <EditText
                 android:id="@+id/newaddress_edittext"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2.5"
+                android:layout_weight="2"
                 android:gravity="center"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"/>
