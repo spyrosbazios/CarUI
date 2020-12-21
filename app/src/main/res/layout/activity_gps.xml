@@ -37,7 +37,6 @@
         <EditText
             android:id="@+id/searchaddress_edittext"
             android:inputType="textCapCharacters"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:layout_width="0dp"
@@ -139,7 +138,7 @@
                 android:gravity="center"/>
             <EditText
                 android:id="@+id/newloc_edittext"
-                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,"
+                android:inputType="textCapCharacters"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:layout_width="0dp"
@@ -167,7 +166,7 @@
                 android:gravity="center"/>
             <EditText
                 android:id="@+id/newaddress_edittext"
-                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,"
+                android:inputType="textCapCharacters"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:layout_width="0dp"
