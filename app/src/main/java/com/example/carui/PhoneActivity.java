@@ -21,7 +21,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class PhoneActivity extends AppCompatActivity implements View.OnClickListener{
+public class PhoneActivity extends AppCompatActivity implements View.OnClickListener, UpdateUtilities{
 
     private ImageView musicLeftButton, musicRightButton;
     private ImageButton homeButton, playButton;
@@ -70,8 +70,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Utilities.CALLER = contactAdapter.getItem(position);
-                Utilities.PLAY_STATE = playState;
-                Utilities.MUSIC_PROGRESS = musicSeekBar.getProgress();
+                updateUtilities();
                 Utilities.startTimer();
                 startActivity(new Intent(PhoneActivity.this, CallingActivity.class));
             }
@@ -83,8 +82,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onBackPressed() {
-        Utilities.PLAY_STATE = playState;
-        Utilities.MUSIC_PROGRESS = musicSeekBar.getProgress();
+        this.updateUtilities();
         startActivity(new Intent(PhoneActivity.this, HomeActivity.class));
         finish();
     }
@@ -104,5 +102,11 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
             musicSeekBar.setProgress(Math.max(musicSeekBar.getProgress() - 10, 0));
         else if (v == musicRightButton)
             musicSeekBar.setProgress(Math.min(musicSeekBar.getProgress() + 10, musicSeekBar.getMax()));
+    }
+
+    @Override
+    public void updateUtilities() {
+        Utilities.PLAY_STATE = playState;
+        Utilities.MUSIC_PROGRESS = musicSeekBar.getProgress();
     }
 }

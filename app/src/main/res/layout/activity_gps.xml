@@ -211,4 +211,12 @@
         android:layout_width="wrap_content"
         android:layout_height="100dp" />
 
+    <ImageButton
+        android:id="@+id/callerbubble_btn"
+        android:background="@drawable/nantiaphoto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="110dp"
+        android:layout_height="110dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

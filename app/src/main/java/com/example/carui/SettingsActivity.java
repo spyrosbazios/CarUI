@@ -25,7 +25,7 @@ import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class SettingsActivity extends AppCompatActivity implements View.OnClickListener{
+public class SettingsActivity extends AppCompatActivity implements View.OnClickListener, UpdateUtilities{
 
     private ImageButton homeButton;
 
@@ -65,14 +65,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
-        Utilities.BRIGHTNESS_PROGRESS = brightnessSeekBar.getProgress();
-        Utilities.AUTOSTATE = autoState;
-        Utilities.LANGUAGE = l;
-        Utilities.DAY = day;
-        Utilities.MONTH = month;
-        Utilities.YEAR = year;
-        Utilities.HOUR = hour;
-        Utilities.MINUTE = minute;
+        this.updateUtilities();
         startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
         finish();
     }
@@ -97,6 +90,18 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         if (v == autoOnButton) autoState = true;
         else if (v == autoOffButton) autoState = false;
         updateAutoState();
+    }
+
+    @Override
+    public void updateUtilities() {
+        Utilities.BRIGHTNESS_PROGRESS = brightnessSeekBar.getProgress();
+        Utilities.AUTOSTATE = autoState;
+        Utilities.LANGUAGE = l;
+        Utilities.DAY = day;
+        Utilities.MONTH = month;
+        Utilities.YEAR = year;
+        Utilities.HOUR = hour;
+        Utilities.MINUTE = minute;
     }
 
     private void initializeBrightnessViews() {

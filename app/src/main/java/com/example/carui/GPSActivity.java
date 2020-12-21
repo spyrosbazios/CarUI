@@ -3,19 +3,24 @@ package com.example.carui;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-public class GPSActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener{
+public class GPSActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener, UpdateUtilities{
 
-    private ImageButton homeButton, moreButton, searchAddressButton;
+    private ImageButton homeButton, moreButton, searchAddressButton, callerBubble;
     private LinearLayout favouritesPanel, newFavouritePanel;
     private boolean moreState = false;
     private Button[] favourites = new Button[5];
@@ -23,6 +28,7 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
     private Button newCancelButton, newAddButton;
     private int newFavouritePos;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +67,12 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         newCancelButton.setOnClickListener(this);
         newAddButton = (Button)findViewById(R.id.newadd_btn);
         newAddButton.setOnClickListener(this);
+
+        callerBubble = (ImageButton)findViewById(R.id.callerbubble_btn);
+        callerBubble.setOnClickListener(this);
+        callerBubble.setOnTouchListener(this);
+        if (Utilities.CALLER == null) callerBubble.setVisibility(View.GONE);
+        if (Utilities.BUBBLE_POSITION != null) callerBubble.setLayoutParams(Utilities.BUBBLE_POSITION);
     }
 
     @Override
@@ -68,8 +80,7 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onBackPressed() {
-        for (int i = 0; i < favourites.length; i++)
-            Utilities.GPS_FAVOURITES[i] = String.valueOf(favourites[i].getText());
+        this.updateUtilities();
         startActivity(new Intent(GPSActivity.this, HomeActivity.class));
         finish();
     }
@@ -90,6 +101,9 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
             if (v == newAddButton && newLocationEditText.getText().length() > 0 && newAddressEditText.getText().length() > 0) {
                 favourites[newFavouritePos].setText(String.valueOf(newLocationEditText.getText() + ": " + newAddressEditText.getText()));
             }
+        }
+        else if (v == callerBubble) {
+            startActivity(new Intent(GPSActivity.this, CallingActivity.class));
         }
 
         for (int i = 0; i < favourites.length; i++) {
@@ -117,6 +131,46 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams)callerBubble.getLayoutParams();
+        int startX = 0;
+        int startY = 0;
+        int newX = 0;
+        int newY = 0;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                startX = layoutParams.leftMargin;
+                startY = layoutParams.topMargin;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                newX = Math.min((int)event.getRawX(), displayMetrics.widthPixels);
+                newY = Math.min((int)event.getRawY(), displayMetrics.heightPixels);
+                layoutParams.leftMargin = newX - callerBubble.getLayoutParams().width;
+                layoutParams.topMargin = newY;// - callerBubble.getLayoutParams().height;
+                callerBubble.setLayoutParams(layoutParams);
+                break;
+            case MotionEvent.ACTION_UP:
+                if (Math.abs(newX - startX) < 1 && Math.abs(newY - startY) < 1) {
+                    this.updateUtilities();
+                    startActivity(new Intent(GPSActivity.this, CallingActivity.class));
+                }
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void updateUtilities() {
+        for (int i = 0; i < favourites.length; i++)
+            Utilities.GPS_FAVOURITES[i] = String.valueOf(favourites[i].getText());
+        Utilities.BUBBLE_POSITION = (ConstraintLayout.LayoutParams)callerBubble.getLayoutParams();
     }
 
     private void setPanelVisibility(LinearLayout panel, boolean flag) {

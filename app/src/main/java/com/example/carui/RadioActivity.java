@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class RadioActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener{
+public class RadioActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, UpdateUtilities{
 
     private int rl;
     private ImageButton homeButton, previousButton, nextButton;
@@ -65,17 +65,6 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
                     favourites.add(Utilities.STATION_FAVOURITES[i][j]);
             }
         }
-
-        /*if (favourites.size() > 0) {
-            for (int i = 0; i < favourites.size(); i++) {
-                if (i == 0) stationTextView[1][0].setText(favourites.get(0) == null ? "+" : favourites.get(0));
-                if (i == 1) stationTextView[2][0].setText(favourites.get(1) == null ? "+" : favourites.get(1));
-                if (i == 2) stationTextView[3][0].setText(favourites.get(2) == null ? "+" : favourites.get(2));
-                if (i == 3) stationTextView[1][1].setText(favourites.get(3) == null ? "+" : favourites.get(3));
-                if (i == 4) stationTextView[2][1].setText(favourites.get(4) == null ? "+" : favourites.get(4));
-                if (i == 5) stationTextView[3][1].setText(favourites.get(5) == null ? "+" : favourites.get(5));
-            }
-        }*/
     }
 
     @Override
@@ -83,15 +72,7 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onBackPressed() {
-        for (int i = 0; i < stationArray.length; i++) {
-            if (stationArray[i].equals(radioButton.getText()))
-                Utilities.RADIOLIVE = i;
-        }
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 2; j++) {
-                Utilities.STATION_FAVOURITES[i][j] = String.valueOf(stationButton[i+1][j].getText());
-            }
-        }
+        this.updateUtilities();
         startActivity(new Intent(RadioActivity.this, HomeActivity.class));
         finish();
     }
@@ -139,5 +120,18 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
             }
         }
         return true;
+    }
+
+    @Override
+    public void updateUtilities() {
+        for (int i = 0; i < stationArray.length; i++) {
+            if (stationArray[i].equals(radioButton.getText()))
+                Utilities.RADIOLIVE = i;
+        }
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 2; j++) {
+                Utilities.STATION_FAVOURITES[i][j] = String.valueOf(stationButton[i+1][j].getText());
+            }
+        }
     }
 }

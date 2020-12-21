@@ -1,5 +1,7 @@
 package com.example.carui;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -17,12 +19,14 @@ public class Utilities {
     public static int LANGUAGE = 2;
     public static boolean AUTOSTATE = true;
     public static String CALLER = null;
+    public static boolean HOLDSTATE = false;
     public static int RADIOLIVE = 2;
     public static String[][] STATION_FAVOURITES = {{"+", "+"}, {"+", "+"}, {"+", "+"}};
     public static String[] GPS_FAVOURITES = {"ADD", "ADD", "ADD", "ADD", "ADD"};
     public static int BRIGHTNESS_PROGRESS = 75;
     public static boolean PLAY_STATE = false;
     public static int MUSIC_PROGRESS = 75;
+    public static ConstraintLayout.LayoutParams BUBBLE_POSITION = null;
 
     public static String calcWeather() {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
