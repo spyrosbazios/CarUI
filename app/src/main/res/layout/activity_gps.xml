@@ -110,6 +110,18 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/callerbubble_btn"
+        android:src="@drawable/nantiaphoto"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="100dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:paddingTop="35dp"/>
     <LinearLayout
         android:id="@+id/linearlayout_newfavourite"
         android:background="@color/teal"
@@ -220,13 +232,5 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="100dp" />
-
-    <ImageButton
-        android:id="@+id/callerbubble_btn"
-        android:background="@drawable/nantiaphoto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="110dp"
-        android:layout_height="110dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
