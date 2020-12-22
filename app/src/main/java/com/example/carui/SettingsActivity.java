@@ -28,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     private int l;
     private ImageView languageUpImageView, languageDownImageView;
     private TextView languageMiddleImageView;
-    private final String[] languageList = {"Arabic", "Chinese", "English", "French", "German", "Japanese", "Portuguese", "Russian", "Spanish"};
+    //private final String[] languageList = {"Arabic", "Chinese", "English", "French", "German", "Japanese", "Portuguese", "Russian", "Spanish"};
 
     private int day, month, year, hour, minute;
     private ImageView dayUpButton, monthUpButton, yearUpButton;
@@ -69,7 +69,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         else if (v == languageUpImageView || v == languageDownImageView) {
             if (v == languageUpImageView) l--;
             else l++;
-            languageMiddleImageView.setText(languageList[Utilities.clampIntToLimits(l, 0, languageList.length-1)]);
+            languageMiddleImageView.setText(Utilities.LANGUAGE_LIST[Utilities.clampIntToLimits(l, 0, Utilities.LANGUAGE_LIST.length-1)]);
         }
         else if (v == brightnessLeftButton)
             brightnessSeekBar.setProgress(Math.max(brightnessSeekBar.getProgress() - 10, 0));
@@ -121,7 +121,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         languageDownImageView.setOnClickListener(this);
 
         l = Utilities.LANGUAGE;
-        languageMiddleImageView.setText(languageList[l]);
+        languageMiddleImageView.setText(Utilities.LANGUAGE_LIST[l]);
     }
 
     private void initializeDateTimeViews() {

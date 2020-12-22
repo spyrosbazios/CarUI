@@ -16,7 +16,8 @@ public class Utilities {
     public static int HOUR = cal.get(Calendar.HOUR_OF_DAY);
     public static int MINUTE = cal.get(Calendar.MINUTE);
 
-    public static int LANGUAGE = 2;
+    public static final String[] LANGUAGE_LIST = {"English", "Greek", "Spanish"};
+    public static int LANGUAGE = 0;
     public static boolean AUTO_STATE = true;
     public static String CALLER = null;
     public static CallingActivity.CALLSTATE CALL_STATE = CallingActivity.CALLSTATE.ANSWER;

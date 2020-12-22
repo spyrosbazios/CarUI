@@ -37,6 +37,8 @@
             android:id="@+id/searchaddress_edittext"
             android:inputType="textCapCharacters"
             android:textColor="@color/white"
+            android:hint="Search ... "
+            android:textColorHint="@color/white"
             android:textSize="15sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

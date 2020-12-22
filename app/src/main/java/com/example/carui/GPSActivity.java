@@ -122,7 +122,9 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
                 Toast.makeText(GPSActivity.this, "Please put call on hold to use voice recognition", Toast.LENGTH_SHORT).show();
             else {
                 Utilities.PLAY_STATE = false;
-                Toast.makeText(GPSActivity.this, "Listening...", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(GPSActivity.this, "Listening...", Toast.LENGTH_SHORT).show();
+                searchAddressEditText.setText("");
+                searchAddressEditText.setHint("Listening...");
                 speechRecognizer.cancel();
                 speechRecognizer.startListening(speechRecognizerIntent);
             }
@@ -173,7 +175,25 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         int startY = 0;
         int newX = 0;
         int newY = 0;
-        switch (event.getAction()) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            startX = layoutParams.leftMargin;
+            startY = layoutParams.topMargin;
+        }
+        else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            newX = Math.min((int)event.getRawX(), displayMetrics.widthPixels);
+            newY = Math.min((int)event.getRawY(), displayMetrics.heightPixels);
+            layoutParams.leftMargin = newX - callerBubble.getLayoutParams().width;
+            layoutParams.topMargin = newY;// - callerBubble.getLayoutParams().height;
+            callerBubble.setLayoutParams(layoutParams);
+        }
+        else if (event.getAction() == MotionEvent.ACTION_UP) {
+            if ((Math.abs(newX - startX) < 50) && (Math.abs(newY - startY) < 50)) {
+                this.updateUtilities();
+                startActivity(new Intent(GPSActivity.this, CallingActivity.class));
+            }
+        }
+        return true;
+        /*switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 startX = layoutParams.leftMargin;
                 startY = layoutParams.topMargin;
@@ -194,7 +214,7 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
             default:
                 break;
         }
-        return true;
+        return true;*/
     }
 
     @Override
@@ -215,7 +235,11 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
     private void handleSpeechRecognizer() {
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "el_GR");
+        String lang = null;
+        if (Utilities.LANGUAGE == 0) lang = "en_001";
+        else if (Utilities.LANGUAGE == 1) lang = "el_GR";
+        else if (Utilities.LANGUAGE == 2) lang = "es_";
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang);
         //speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
         speechRecognizer.setRecognitionListener(new RecognitionListener() {
             @Override public void onReadyForSpeech(Bundle params) {}
