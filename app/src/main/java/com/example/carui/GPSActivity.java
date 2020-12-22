@@ -121,6 +121,7 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
             if ((Utilities.CALLER != null) && (Utilities.CALL_STATE != CallingActivity.CALLSTATE.HOLD))
                 Toast.makeText(GPSActivity.this, "Please put call on hold to use voice recognition", Toast.LENGTH_SHORT).show();
             else {
+                Utilities.PLAY_STATE = false;
                 Toast.makeText(GPSActivity.this, "Listening...", Toast.LENGTH_SHORT).show();
                 speechRecognizer.cancel();
                 speechRecognizer.startListening(speechRecognizerIntent);

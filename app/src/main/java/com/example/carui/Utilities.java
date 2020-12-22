@@ -24,7 +24,7 @@ public class Utilities {
     public static String[][] STATION_FAVOURITES = {{"+", "+"}, {"+", "+"}, {"+", "+"}};
     public static String[] GPS_FAVOURITES = {"ADD", "ADD", "ADD", "ADD", "ADD"};
     public static int BRIGHTNESS_PROGRESS = 75;
-    public static boolean PLAY_STATE = false;
+    public static boolean PLAY_STATE = true;
     public static int MUSIC_PROGRESS = 75;
     public static ConstraintLayout.LayoutParams BUBBLE_POSITION = null;
 

@@ -43,9 +43,10 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
         playButton.setOnClickListener(this);
         playState = Utilities.PLAY_STATE;
         if (playState)
-            playButton.setBackgroundResource(R.drawable.musicplay);
-        else
             playButton.setBackgroundResource(R.drawable.holdcall);
+        else
+            playButton.setBackgroundResource(R.drawable.musicplay);
+
         musicSeekBar = (SeekBar)findViewById(R.id.musicbar_seekbar);
         musicSeekBar.setOnClickListener(this);
         musicSeekBar.setMax(100);
@@ -91,9 +92,10 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
         else if (v == playButton) {
             playState = !playState;
             if (playState)
-                playButton.setBackgroundResource(R.drawable.musicplay);
-            else
                 playButton.setBackgroundResource(R.drawable.holdcall);
+            else
+                playButton.setBackgroundResource(R.drawable.musicplay);
+
         }
         else if (v == musicLeftButton)
             musicSeekBar.setProgress(Math.max(musicSeekBar.getProgress() - 10, 0));
