@@ -1,32 +1,41 @@
 package com.example.carui;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class GPSActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener, UpdateUtilities{
 
-    private ImageButton homeButton, moreButton, searchAddressButton, callerBubble;
+    private ImageButton homeButton, moreButton, searchAddressButton, voiceButton, callerBubble;
     private LinearLayout favouritesPanel, newFavouritePanel;
     private boolean moreState = false;
     private Button[] favourites = new Button[5];
     private EditText searchAddressEditText, newLocationEditText, newAddressEditText;
     private Button newCancelButton, newAddButton;
     private int newFavouritePos;
+    private SpeechRecognizer speechRecognizer;
+    final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+    private final int RECORD_AUDIO_REQUEST_CODE = 1;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -73,13 +82,25 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         callerBubble.setOnTouchListener(this);
         if (Utilities.CALLER == null) callerBubble.setVisibility(View.GONE);
         if (Utilities.BUBBLE_POSITION != null) callerBubble.setLayoutParams(Utilities.BUBBLE_POSITION);
+
+        voiceButton = (ImageButton)findViewById(R.id.voice_btn);
+        voiceButton.setOnClickListener(this);
+        askVoicePermission();
+        handleSpeechRecognizer();
     }
 
     @Override
     protected void onPause() {super.onPause();}
 
+    /*@Override
+    protected void onDestroy() {
+        super.onDestroy();
+        speechRecognizer.destroy();
+    }*/
+
     @Override
     public void onBackPressed() {
+        speechRecognizer.destroy();
         this.updateUtilities();
         startActivity(new Intent(GPSActivity.this, HomeActivity.class));
         finish();
@@ -95,6 +116,15 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         }
         else if (v == searchAddressButton) {
             Toast.makeText(GPSActivity.this, "Navigating to " + searchAddressEditText.getText(), Toast.LENGTH_SHORT).show();
+        }
+        else if (v == voiceButton) {
+            if ((Utilities.CALLER != null) && (Utilities.CALL_STATE != CallingActivity.CALLSTATE.HOLD))
+                Toast.makeText(GPSActivity.this, "Please put call on hold to use voice recognition", Toast.LENGTH_SHORT).show();
+            else {
+                Toast.makeText(GPSActivity.this, "Listening...", Toast.LENGTH_SHORT).show();
+                speechRecognizer.cancel();
+                speechRecognizer.startListening(speechRecognizerIntent);
+            }
         }
         else if (v == newCancelButton || v == newAddButton) {
             setPanelVisibility(newFavouritePanel, false);
@@ -179,5 +209,30 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
             panel.getChildAt(i).setVisibility(state);
         }
         panel.setVisibility(state);
+    }
+
+    private void handleSpeechRecognizer() {
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "el_GR");
+        //speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override public void onReadyForSpeech(Bundle params) {}
+            @Override public void onBeginningOfSpeech() {}
+            @Override public void onRmsChanged(float rmsdB) {}
+            @Override public void onBufferReceived(byte[] buffer) {}
+            @Override public void onEndOfSpeech() {speechRecognizer.stopListening();}
+            @Override public void onError(int error) {}
+            @Override public void onPartialResults(Bundle partialResults) {}
+            @Override public void onEvent(int eventType, Bundle params) {}
+            @Override public void onResults(Bundle results) {
+                ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                searchAddressEditText.setText(data.get(0));
+            }
+        });;
+    }
+
+    private void askVoicePermission() {
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO}, RECORD_AUDIO_REQUEST_CODE);
     }
 }

@@ -11,8 +11,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="true" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:id="@+id/linearlayout_bar"
@@ -202,6 +201,15 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/voice_btn"
+        android:background="@drawable/voicebutton"
+        app:layout_constraintStart_toEndOf="@id/linearlayout_bar"
+        app:layout_constraintBottom_toBottomOf="@id/linearlayout_bar"
+        android:layout_marginStart="20dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
     <ImageButton
         android:id="@+id/home_btn"

@@ -45,9 +45,6 @@ public class Utilities {
     }
 
     public static int clampIntToLimits (int x, int min, int max) {
-        /*if (x < min) return max;
-        else if (x > max) return min;
-        return x;*/
         return Math.min(Math.max(x, min), max);
     }
 
