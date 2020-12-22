@@ -41,14 +41,14 @@
             android:layout_gravity="center">
 
             <ImageView
-                android:id="@+id/answer_img"
+                android:id="@+id/left_img"
                 android:src="@drawable/answercall"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"/>
             <TextView
-                android:id="@+id/answer_textview"
+                android:id="@+id/left_textview"
                 android:text="Answer"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
@@ -101,14 +101,14 @@
             android:layout_gravity="center">
 
             <ImageView
-                android:id="@+id/decline_img"
+                android:id="@+id/right_img"
                 android:src="@drawable/declinecall"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"/>
             <TextView
-                android:id="@+id/decline_textview"
+                android:id="@+id/right_textview"
                 android:text="Decline"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
@@ -120,86 +120,22 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearlayout_overlay"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp">
-
-        <LinearLayout
-            android:id="@+id/linearlayout_holdcall"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_gravity="center">
-
-            <ImageView
-                android:id="@+id/hold_img"
-                android:src="@drawable/holdcall"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/hold_textview"
-                android:text="Hold"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginBottom="100dp"
-                android:layout_gravity="center" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearlayout_empty1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_gravity="center">
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linearlayout_empty2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_gravity="center">
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/linearlayout_buttons"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp">
+        android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/answer_btn"
+            android:id="@+id/left_btn"
             android:background="@null"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
         <ImageButton
-            android:id="@+id/decline_btn"
+            android:id="@+id/right_btn"
             android:background="@null"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"/>

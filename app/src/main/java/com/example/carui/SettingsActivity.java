@@ -1,13 +1,8 @@
 package com.example.carui;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -19,11 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import org.w3c.dom.Text;
-
 import java.text.DateFormatSymbols;
-import java.util.Calendar;
-import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener, UpdateUtilities{
 
@@ -95,7 +86,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void updateUtilities() {
         Utilities.BRIGHTNESS_PROGRESS = brightnessSeekBar.getProgress();
-        Utilities.AUTOSTATE = autoState;
+        Utilities.AUTO_STATE = autoState;
         Utilities.LANGUAGE = l;
         Utilities.DAY = day;
         Utilities.MONTH = month;
@@ -116,7 +107,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         autoOffButton = (Button)findViewById(R.id.autooff_btn);
         autoOffButton.setOnClickListener(this);
 
-        autoState = Utilities.AUTOSTATE;
+        autoState = Utilities.AUTO_STATE;
         brightnessSeekBar.setMax(100);
         brightnessSeekBar.setProgress(Utilities.BRIGHTNESS_PROGRESS);
         updateAutoState();

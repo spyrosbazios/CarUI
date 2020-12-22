@@ -56,7 +56,7 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
         stationButton[0][0].setText(Utilities.calcWeather());
         stationButton[0][1].setText(Utilities.calcTime());
 
-        rl = Utilities.RADIOLIVE;
+        rl = Utilities.RADIO_LIVE;
         radioButton.setText(stationArray[rl]);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
@@ -126,7 +126,7 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
     public void updateUtilities() {
         for (int i = 0; i < stationArray.length; i++) {
             if (stationArray[i].equals(radioButton.getText()))
-                Utilities.RADIOLIVE = i;
+                Utilities.RADIO_LIVE = i;
         }
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {

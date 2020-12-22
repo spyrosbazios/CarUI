@@ -17,10 +17,10 @@ public class Utilities {
     public static int MINUTE = cal.get(Calendar.MINUTE);
 
     public static int LANGUAGE = 2;
-    public static boolean AUTOSTATE = true;
+    public static boolean AUTO_STATE = true;
     public static String CALLER = null;
-    public static boolean HOLDSTATE = false;
-    public static int RADIOLIVE = 2;
+    public static CallingActivity.CALLSTATE CALL_STATE = CallingActivity.CALLSTATE.ANSWER;
+    public static int RADIO_LIVE = 2;
     public static String[][] STATION_FAVOURITES = {{"+", "+"}, {"+", "+"}, {"+", "+"}};
     public static String[] GPS_FAVOURITES = {"ADD", "ADD", "ADD", "ADD", "ADD"};
     public static int BRIGHTNESS_PROGRESS = 75;

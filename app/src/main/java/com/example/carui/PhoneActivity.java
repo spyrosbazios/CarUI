@@ -2,18 +2,14 @@ package com.example.carui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -70,6 +66,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Utilities.CALLER = contactAdapter.getItem(position);
+                Utilities.CALL_STATE = CallingActivity.CALLSTATE.RUNNING;
                 updateUtilities();
                 Utilities.startTimer();
                 startActivity(new Intent(PhoneActivity.this, CallingActivity.class));
