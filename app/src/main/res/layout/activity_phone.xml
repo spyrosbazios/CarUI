@@ -83,13 +83,31 @@
                 android:layout_weight="15"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"/>
-            <ImageView
-                android:id="@+id/title_img"
-                android:src="@drawable/rosestitle"
+            <LinearLayout
+                android:id="@+id/linearlayout_artistsong"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
+                android:layout_weight="6"
                 android:layout_gravity="center"
-                android:layout_weight="7"/>
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/artist_textview"
+                    android:text="Artist"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/songtitle_textview"
+                    android:text="Title"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+            </LinearLayout>
             <SeekBar
                 android:id="@+id/musicbar_seekbar"
                 android:thumbTint="@color/white"
@@ -152,15 +170,21 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/voice_btn"
-        android:background="@drawable/voicebutton"
+    <LinearLayout
+        android:id="@+id/linearlayout_voice"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="340dp"
-        android:layout_marginTop="170dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="225dp"
+        android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/voice_btn"
+            android:background="@drawable/voicebutton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/home_btn"

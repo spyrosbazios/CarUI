@@ -21,6 +21,7 @@ public class Utilities {
     public static boolean AUTO_STATE = true;
     public static String CALLER = null;
     public static CallingActivity.CALLSTATE CALL_STATE = CallingActivity.CALLSTATE.ANSWER;
+    public static int SONG = 0;
     public static int RADIO_LIVE = 2;
     public static String[][] STATION_FAVOURITES = {{"+", "+"}, {"+", "+"}, {"+", "+"}};
     public static String[] GPS_FAVOURITES = {"ADD", "ADD", "ADD", "ADD", "ADD"};
@@ -32,7 +33,7 @@ public class Utilities {
     public static String calcWeather() {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         int month = cal.get(Calendar.MONTH);
-        double temp = (Math.pow((month - 6), 4))/(-25) + 35;
+        double temp = (Math.pow((MONTH - 6), 4))/(-40) + 35;
         DecimalFormat df = new DecimalFormat("##.#");
         return df.format(temp) + " C";
     }

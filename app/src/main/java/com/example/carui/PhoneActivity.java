@@ -23,14 +23,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class PhoneActivity extends AppCompatActivity implements View.OnClickListener, UpdateUtilities{
 
     private ImageView musicLeftButton, musicRightButton;
     private ImageButton homeButton, playButton, voiceButton;
+    private TextView artistTextView, titleTextView;
     private ListView contactListView;
-    private String[] contactList = {"Spyros", "Christos", "Manos", "Nantia", "Ion Androutsopoulos", "Chalkidis", "Dio", "Chara", "George"};
+    private int s;
+    private final String[] songList = {"SAINt JHN-Roses", "Kanye West-Gorgeous", "Frank Ocean-Pyramids"};
+    private final String[] contactList = {"Spyros", "Christos", "Manos", "Nantia", "Ion Androutsopoulos", "Chalkidis", "Dio", "Chara", "George"};
     private SeekBar musicSeekBar;
     private boolean playState;
     private SpeechRecognizer speechRecognizer;
@@ -46,6 +51,13 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
         homeButton = (ImageButton)findViewById(R.id.home_btn);
         homeButton.setOnClickListener(this);
 
+        s = Utilities.SONG;
+        artistTextView = (TextView)(findViewById(R.id.artist_textview));
+        titleTextView = (TextView)(findViewById(R.id.songtitle_textview));
+        String[] st = songList[s].split("-", 2);
+        artistTextView.setText(st[0]);
+        titleTextView.setText(st[1]);
+
         musicLeftButton = (ImageView)findViewById(R.id.musicprevious_img);
         musicLeftButton.setOnClickListener(this);
         musicRightButton = (ImageView)findViewById(R.id.musicnext_img);
@@ -54,7 +66,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
         playButton.setOnClickListener(this);
         playState = Utilities.PLAY_STATE;
         if (playState)
-            playButton.setBackgroundResource(R.drawable.holdcall);
+            playButton.setBackgroundResource(R.drawable.musicpause);
         else
             playButton.setBackgroundResource(R.drawable.musicplay);
 
@@ -104,15 +116,19 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
         else if (v == playButton) {
             playState = !playState;
             if (playState)
-                playButton.setBackgroundResource(R.drawable.holdcall);
+                playButton.setBackgroundResource(R.drawable.musicpause);
             else
                 playButton.setBackgroundResource(R.drawable.musicplay);
 
         }
-        else if (v == musicLeftButton)
-            musicSeekBar.setProgress(Math.max(musicSeekBar.getProgress() - 10, 0));
-        else if (v == musicRightButton)
-            musicSeekBar.setProgress(Math.min(musicSeekBar.getProgress() + 10, musicSeekBar.getMax()));
+        else if (v == musicLeftButton || v == musicRightButton) {
+            if (v == musicLeftButton) s--;
+            else s++;
+            s = Utilities.clampIntToLimits(s, 0, songList.length-1);
+            String[] st = songList[s].split("-", 2);
+            artistTextView.setText(st[0]);
+            titleTextView.setText(st[1]);
+        }
         else if (v == voiceButton) {
             Utilities.PLAY_STATE = false;
             Toast.makeText(PhoneActivity.this, "Listening...", Toast.LENGTH_SHORT).show();
@@ -123,6 +139,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void updateUtilities() {
+        Utilities.SONG = s;
         Utilities.PLAY_STATE = playState;
         Utilities.MUSIC_PROGRESS = musicSeekBar.getProgress();
     }
@@ -155,7 +172,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
             @Override public void onResults(Bundle results) {
                 ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 if (!data.get(0).contains(" ")) return;
-                Toast.makeText(PhoneActivity.this, data.get(0), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PhoneActivity.this, data.get(0), Toast.LENGTH_SHORT).show();
                 String[] r = data.get(0).split(" ", 2);
                 if (r[0].equalsIgnoreCase("call")) {
                     for (String c : contactList) {
@@ -163,6 +180,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
                             callContact(c);
                     }
                 }
+                else Toast.makeText(PhoneActivity.this, "Speech recognition failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

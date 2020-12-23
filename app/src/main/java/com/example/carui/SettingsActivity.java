@@ -69,7 +69,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         else if (v == languageUpImageView || v == languageDownImageView) {
             if (v == languageUpImageView) l--;
             else l++;
-            languageMiddleImageView.setText(Utilities.LANGUAGE_LIST[Utilities.clampIntToLimits(l, 0, Utilities.LANGUAGE_LIST.length-1)]);
+            l = Utilities.clampIntToLimits(l, 0, Utilities.LANGUAGE_LIST.length-1);
+            languageMiddleImageView.setText(Utilities.LANGUAGE_LIST[l]);
         }
         else if (v == brightnessLeftButton)
             brightnessSeekBar.setProgress(Math.max(brightnessSeekBar.getProgress() - 10, 0));

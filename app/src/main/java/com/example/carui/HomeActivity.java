@@ -9,12 +9,14 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView weatherTextView, timeTextView, dateTextView;
     private ImageButton gpsButton, radioButton, phoneButton, settingsButton;
+    private ImageView weatherImageView;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -24,6 +26,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         weatherTextView = (TextView)findViewById(R.id.textview_weather);
         weatherTextView.setText(Utilities.calcWeather());
+        weatherImageView = (ImageView)findViewById(R.id.weather_img);
+        weatherImageView.setImageResource(Utilities.calcWeather().compareToIgnoreCase("25") < 0 ? R.drawable.weathercloud : R.drawable.weathersun);
         timeTextView = (TextView)findViewById(R.id.textview_time);
         timeTextView.setText(Utilities.calcTime());
         dateTextView = (TextView)findViewById(R.id.textview_date);

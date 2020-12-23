@@ -213,8 +213,17 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
         </LinearLayout>
-
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/stigma_img"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="450dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/positionindicator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/voice_btn"

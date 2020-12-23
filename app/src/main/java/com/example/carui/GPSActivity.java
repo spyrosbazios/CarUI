@@ -120,8 +120,8 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
             else {
                 Utilities.PLAY_STATE = false;
                 Toast.makeText(GPSActivity.this, "Listening...", Toast.LENGTH_SHORT).show();
-                /*searchAddressEditText.setText("");
-                searchAddressEditText.setHint("Listening...");*/
+                searchAddressEditText.setText("");
+                searchAddressEditText.setHint("Listening...");
                 speechRecognizer.cancel();
                 speechRecognizer.startListening(speechRecognizerIntent);
             }
@@ -207,7 +207,11 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
                             return;
                         }
                     }
-                    Toast.makeText(GPSActivity.this, "Navigating " + r[1], Toast.LENGTH_SHORT).show();
+                    searchAddressEditText.setText(r[1]);
+                }
+                else {
+                    searchAddressEditText.setHint("Search ...");
+                    Toast.makeText(GPSActivity.this, "Speech recognition failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });

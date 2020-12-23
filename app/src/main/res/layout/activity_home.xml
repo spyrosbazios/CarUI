@@ -43,32 +43,41 @@
                 android:id="@+id/textview_weather"
                 android:text="19 C"
                 android:textSize="50sp"
-                android:textColor="@color/grey"
-                android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:gravity="center" />
+            <ImageView
+                android:id="@+id/weather_img"
+                android:src="@drawable/weathercloud"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="75dp"
+                android:layout_weight="0.5"/>
             <TextView
                 android:id="@+id/textview_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:gravity="center"
+                android:text="08:09"
                 android:textSize="50sp"
                 android:textColor="@color/white"
-                android:text="08:09"/>
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_weight="2"
+                android:gravity="center" />
             <TextView
                 android:id="@+id/textview_date"
                 android:text="13 OCT"
                 android:textSize="50sp"
-                android:textColor="@color/grey"
-                android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:gravity="center"
-                android:layout_marginTop="60dp"
-                android:layout_weight="1" />
+                android:layout_marginTop="60dp" />
 
         </LinearLayout>
 
@@ -84,33 +93,33 @@
 
             <ImageButton
                 android:id="@+id/gps_btn"
+                android:background="@drawable/gpsbutton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_weight="1"
-                android:background="@drawable/gpsbutton"/>
+                android:layout_weight="1" />
             <ImageButton
                 android:id="@+id/radio_btn"
+                android:background="@drawable/radiobutton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_weight="1"
-                android:background="@drawable/radiobutton"/>
+                android:layout_weight="1" />
             <ImageButton
                 android:id="@+id/phone_btn"
+                android:background="@drawable/phonebutton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_weight="1"
-                android:background="@drawable/phonebutton"/>
+                android:layout_weight="1" />
             <ImageButton
                 android:id="@+id/settings_btn"
+                android:background="@drawable/settingsbutton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:layout_weight="1"
-                android:background="@drawable/settingsbutton"/>
+                android:layout_weight="1" />
         </LinearLayout>
 
     </LinearLayout>
