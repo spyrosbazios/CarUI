@@ -119,9 +119,9 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
                 Toast.makeText(GPSActivity.this, "Please put call on hold to use voice recognition", Toast.LENGTH_SHORT).show();
             else {
                 Utilities.PLAY_STATE = false;
-                //Toast.makeText(GPSActivity.this, "Listening...", Toast.LENGTH_SHORT).show();
-                searchAddressEditText.setText("");
-                searchAddressEditText.setHint("Listening...");
+                Toast.makeText(GPSActivity.this, "Listening...", Toast.LENGTH_SHORT).show();
+                /*searchAddressEditText.setText("");
+                searchAddressEditText.setHint("Listening...");*/
                 speechRecognizer.cancel();
                 speechRecognizer.startListening(speechRecognizerIntent);
             }
@@ -197,14 +197,18 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
             @Override public void onEvent(int eventType, Bundle params) {}
             @Override public void onResults(Bundle results) {
                 ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                for (Button b : favouritesButton) {
-                    if (b.getText().toString().toUpperCase().contains(data.get(0).toUpperCase())) {
-                        Toast.makeText(GPSActivity.this, "Navigating to " + b.getText(), Toast.LENGTH_SHORT).show();
-                        searchAddressEditText.setHint("");
-                        return;
+                if (!data.get(0).contains(" ")) return;
+                String[] r = data.get(0).split(" ", 2);
+                if (r[0].equalsIgnoreCase("navigate")) {
+                    for (Button b : favouritesButton) {
+                        if (b.getText().toString().toUpperCase().contains(r[1].toUpperCase())) {
+                            Toast.makeText(GPSActivity.this, "Navigating to " + b.getText(), Toast.LENGTH_SHORT).show();
+                            searchAddressEditText.setHint("");
+                            return;
+                        }
                     }
+                    Toast.makeText(GPSActivity.this, "Navigating " + r[1], Toast.LENGTH_SHORT).show();
                 }
-                searchAddressEditText.setText(data.get(0));
             }
         });
     }

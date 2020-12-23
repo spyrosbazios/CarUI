@@ -156,8 +156,8 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
                 ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 if (!data.get(0).contains(" ")) return;
                 Toast.makeText(PhoneActivity.this, data.get(0), Toast.LENGTH_SHORT).show();
-                String[] r = data.get(0).split(" ");
-                if (r[0].equalsIgnoreCase("CALL")) {
+                String[] r = data.get(0).split(" ", 2);
+                if (r[0].equalsIgnoreCase("call")) {
                     for (String c : contactList) {
                         if (c.equalsIgnoreCase(r[1]))
                             callContact(c);
