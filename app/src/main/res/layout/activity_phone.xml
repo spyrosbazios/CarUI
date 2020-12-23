@@ -153,6 +153,16 @@
     </LinearLayout>
 
     <ImageButton
+        android:id="@+id/voice_btn"
+        android:background="@drawable/voicebutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="340dp"
+        android:layout_marginTop="170dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+    <ImageButton
         android:id="@+id/home_btn"
         android:background="@drawable/awsomehomebutton"
         app:layout_constraintStart_toStartOf="parent"

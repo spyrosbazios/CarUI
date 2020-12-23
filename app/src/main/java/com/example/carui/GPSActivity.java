@@ -163,6 +163,58 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         return true;
     }
 
+    @Override
+    public void updateUtilities() {
+        for (int i = 0; i < favouritesButton.length; i++)
+            Utilities.GPS_FAVOURITES[i] = String.valueOf(favouritesButton[i].getText());
+        Utilities.BUBBLE_POSITION = (ConstraintLayout.LayoutParams)callerBubble.getLayoutParams();
+    }
+
+    private void setPanelVisibility(LinearLayout panel, boolean flag) {
+        int state = flag ? View.VISIBLE : View.GONE;
+        for (int i = 0; i < panel.getChildCount(); i++) {
+            panel.getChildAt(i).setVisibility(state);
+        }
+        panel.setVisibility(state);
+    }
+
+    private void handleSpeechRecognizer() {
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        String lang = null;
+        if (Utilities.LANGUAGE == 0) lang = "en_001";
+        else if (Utilities.LANGUAGE == 1) lang = "el_GR";
+        else if (Utilities.LANGUAGE == 2) lang = "es_";
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang);
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override public void onReadyForSpeech(Bundle params) {}
+            @Override public void onBeginningOfSpeech() {}
+            @Override public void onRmsChanged(float rmsdB) {}
+            @Override public void onBufferReceived(byte[] buffer) {}
+            @Override public void onEndOfSpeech() {speechRecognizer.stopListening();}
+            @Override public void onError(int error) {}
+            @Override public void onPartialResults(Bundle partialResults) {}
+            @Override public void onEvent(int eventType, Bundle params) {}
+            @Override public void onResults(Bundle results) {
+                ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                for (Button b : favouritesButton) {
+                    if (b.getText().toString().toUpperCase().contains(data.get(0).toUpperCase())) {
+                        Toast.makeText(GPSActivity.this, "Navigating to " + b.getText(), Toast.LENGTH_SHORT).show();
+                        searchAddressEditText.setHint("");
+                        return;
+                    }
+                }
+                searchAddressEditText.setText(data.get(0));
+            }
+        });
+    }
+
+    private void askVoicePermission() {
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO}, RECORD_AUDIO_REQUEST_CODE);
+    }
+
+}
+
     /*int startX = 0;
     int startY = 0;
     int newX = 0;
@@ -201,56 +253,3 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         }
         return true;
     }*/
-
-    @Override
-    public void updateUtilities() {
-        for (int i = 0; i < favouritesButton.length; i++)
-            Utilities.GPS_FAVOURITES[i] = String.valueOf(favouritesButton[i].getText());
-        Utilities.BUBBLE_POSITION = (ConstraintLayout.LayoutParams)callerBubble.getLayoutParams();
-    }
-
-    private void setPanelVisibility(LinearLayout panel, boolean flag) {
-        int state = flag ? View.VISIBLE : View.GONE;
-        for (int i = 0; i < panel.getChildCount(); i++) {
-            panel.getChildAt(i).setVisibility(state);
-        }
-        panel.setVisibility(state);
-    }
-
-    private void handleSpeechRecognizer() {
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        String lang = null;
-        if (Utilities.LANGUAGE == 0) lang = "en_001";
-        else if (Utilities.LANGUAGE == 1) lang = "el_GR";
-        else if (Utilities.LANGUAGE == 2) lang = "es_";
-        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang);
-        //speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        speechRecognizer.setRecognitionListener(new RecognitionListener() {
-            @Override public void onReadyForSpeech(Bundle params) {}
-            @Override public void onBeginningOfSpeech() {}
-            @Override public void onRmsChanged(float rmsdB) {}
-            @Override public void onBufferReceived(byte[] buffer) {}
-            @Override public void onEndOfSpeech() {speechRecognizer.stopListening();}
-            @Override public void onError(int error) {}
-            @Override public void onPartialResults(Bundle partialResults) {}
-            @Override public void onEvent(int eventType, Bundle params) {}
-            @Override public void onResults(Bundle results) {
-                ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                for (Button b : favouritesButton) {
-                    if (b.getText().toString().toUpperCase().contains(data.get(0).toUpperCase())) {
-                        Toast.makeText(GPSActivity.this, "Navigating to " + b.getText(), Toast.LENGTH_SHORT).show();
-                        searchAddressEditText.setHint("");
-                        return;
-                    }
-                }
-                searchAddressEditText.setText(data.get(0));
-            }
-        });;
-    }
-
-    private void askVoicePermission() {
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO}, RECORD_AUDIO_REQUEST_CODE);
-    }
-
-}
