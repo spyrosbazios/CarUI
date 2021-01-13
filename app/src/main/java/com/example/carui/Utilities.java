@@ -23,7 +23,7 @@ public class Utilities {
     public static CallingActivity.CALLSTATE CALL_STATE = CallingActivity.CALLSTATE.ANSWER;
     public static int SONG = 0;
     public static int RADIO_LIVE = 2;
-    public static String[][] STATION_FAVOURITES = {{"+", "+"}, {"+", "+"}, {"+", "+"}};
+    public static String[][] STATION_FAVOURITES = {{"ADD", "ADD"}, {"ADD", "ADD"}, {"ADD", "ADD"}};
     public static String[] GPS_FAVOURITES = {"ADD", "ADD", "ADD", "ADD", "ADD"};
     public static int BRIGHTNESS_PROGRESS = 75;
     public static boolean PLAY_STATE = true;

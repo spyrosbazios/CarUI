@@ -61,7 +61,7 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
                 stationButton[i+1][j].setText(Utilities.STATION_FAVOURITES[i][j]);
-                if (!Utilities.STATION_FAVOURITES[i][j].equals("+"))
+                if (!Utilities.STATION_FAVOURITES[i][j].equals("ADD"))
                     favourites.add(Utilities.STATION_FAVOURITES[i][j]);
             }
         }
@@ -89,7 +89,7 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
             outerloop: for (int i = 1; i < 4; i ++) {
                 for (int j = 0; j < 2; j++) {
                     if (v == stationButton[i][j]) {
-                        if (((Button)v).getText().equals("+")) {
+                        if (((Button)v).getText().equals("ADD")) {
                             if (!favourites.contains(String.valueOf(radioButton.getText()))) {
                                 ((Button)v).setText(radioButton.getText());
                                 favourites.add(String.valueOf(radioButton.getText()));
@@ -110,10 +110,10 @@ public class RadioActivity extends AppCompatActivity implements View.OnClickList
         outerloop: for (int i = 1; i < 4; i ++) {
             for (int j = 0; j < 2; j++) {
                 if (v == stationButton[i][j]) {
-                    if (!(((Button)v).getText().equals("+"))) {
+                    if (!(((Button)v).getText().equals("ADD"))) {
                         favourites.remove(((Button)v).getText());
                         Toast.makeText(RadioActivity.this, ((Button)v).getText() + " removed from favourites", Toast.LENGTH_SHORT).show();
-                        ((Button)v).setText("+");
+                        ((Button)v).setText("ADD");
                     }
                     break outerloop;
                 }

@@ -33,40 +33,40 @@
 
             <Button
                 android:id="@+id/leftstation1_textview"
-                android:background="@drawable/radioadd"
+                android:background="@null"
                 android:textColor="@color/white"
                 android:textSize="40dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"/>
             <Button
                 android:id="@+id/leftstation2_textview"
                 android:background="@drawable/radioadd"
-                android:text="+"
-                android:textSize="40sp"
+                android:text="ADD"
+                android:textSize="25sp"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"/>
             <Button
                 android:id="@+id/leftstation3_textview"
                 android:background="@drawable/radioadd"
-                android:text="+"
-                android:textSize="40sp"
+                android:text="ADD"
+                android:textSize="25sp"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"/>
             <Button
                 android:id="@+id/leftstation4_textview"
                 android:background="@drawable/radioadd"
-                android:text="+"
-                android:textSize="40sp"
+                android:text="ADD"
+                android:textSize="25sp"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"/>
@@ -137,40 +137,40 @@
 
             <Button
                 android:id="@+id/rightstation1_textview"
-                android:background="@drawable/radioadd"
+                android:background="@null"
                 android:textSize="40sp"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"/>
             <Button
                 android:id="@+id/rightstation2_textview"
                 android:background="@drawable/radioadd"
-                android:text="+"
-                android:textSize="40sp"
+                android:text="ADD"
+                android:textSize="25sp"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"/>
             <Button
                 android:id="@+id/rightstation3_textview"
                 android:background="@drawable/radioadd"
-                android:text="+"
-                android:textSize="40sp"
+                android:text="ADD"
+                android:textSize="25sp"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"/>
             <Button
                 android:id="@+id/rightstation4_textview"
                 android:background="@drawable/radioadd"
-                android:text="+"
-                android:textSize="40sp"
+                android:text="ADD"
+                android:textSize="25sp"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"/>
