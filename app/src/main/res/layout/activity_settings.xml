@@ -36,7 +36,7 @@
                 android:id="@+id/brightness_textview"
                 android:text="Brightness"
                 android:textColor="@color/white"
-                android:textSize="35dp"
+                android:textSize="35sp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="100dp"

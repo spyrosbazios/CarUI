@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -24,16 +25,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class GPSActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, UpdateUtilities{
 
     private ImageButton homeButton, moreButton, searchAddressButton, voiceButton, callerBubble;
-    private LinearLayout favouritesPanel, newFavouritePanel;
+    private LinearLayout favouritesPanel, newFavouritePanel, destinationPanel;
     private boolean moreState = false;
     private final Button[] favouritesButton = new Button[5];
     private EditText searchAddressEditText, newLocationEditText, newAddressEditText;
-    private Button newCancelButton, newAddButton;
+    private Button newCancelButton, newAddButton, cancelDestination;
+    private TextView destinationTextView;
     private int newFavouritePos;
     private SpeechRecognizer speechRecognizer;
     final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -89,6 +93,17 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         voiceButton.setOnClickListener(this);
         askVoicePermission();
         handleSpeechRecognizer();
+
+        destinationPanel = (LinearLayout)findViewById(R.id.linearlayout_destination);
+        setPanelVisibility(destinationPanel, false);
+        cancelDestination = (Button)findViewById(R.id.removedestination_btn);
+        cancelDestination.setOnClickListener(this);
+        destinationTextView = (TextView)findViewById(R.id.destinationvar_textview);
+        if (Utilities.DESTINATION != null) {
+            destinationTextView.setText(Utilities.DESTINATION);
+            setPanelVisibility(destinationPanel, true);
+        }
+        else setPanelVisibility(destinationPanel, false);
     }
 
     @Override
@@ -102,6 +117,7 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         finish();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
         if (v == homeButton)
@@ -111,8 +127,12 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
             setPanelVisibility(favouritesPanel, moreState);
         }
         else if (v == searchAddressButton) {
-            if (searchAddressEditText.getText().length() > 0)
-                Toast.makeText(GPSActivity.this, "Navigating to " + searchAddressEditText.getText(), Toast.LENGTH_SHORT).show();
+            if (searchAddressEditText.getText().length() > 0) {
+                destinationTextView.setText(searchAddressEditText.getText());
+                setPanelVisibility(destinationPanel, true);
+                searchAddressEditText.setText("");
+                //Toast.makeText(GPSActivity.this, "Navigating to " + searchAddressEditText.getText(), Toast.LENGTH_SHORT).show();
+            }
         }
         else if (v == voiceButton) {
             if ((Utilities.CALLER != null) && (Utilities.CALL_STATE != CallingActivity.CALLSTATE.HOLD))
@@ -129,11 +149,15 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         else if (v == newCancelButton || v == newAddButton) {
             setPanelVisibility(newFavouritePanel, false);
             if (v == newAddButton && newLocationEditText.getText().length() > 0 && newAddressEditText.getText().length() > 0) {
-                favouritesButton[newFavouritePos].setText(String.valueOf(newLocationEditText.getText() + ": " + newAddressEditText.getText()));
+                favouritesButton[newFavouritePos].setText(newLocationEditText.getText() + ": " + newAddressEditText.getText());
             }
         }
         else if (v == callerBubble) {
             startActivity(new Intent(GPSActivity.this, CallingActivity.class));
+        }
+        else if (v == cancelDestination) {
+            setPanelVisibility(destinationPanel, false);
+            destinationTextView.setText(null);
         }
 
         for (int i = 0; i < favouritesButton.length; i++) {
@@ -143,7 +167,9 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
                     newFavouritePos = i;
                 }
                 else {
-                    Toast.makeText(GPSActivity.this, "Navigating to " + favouritesButton[i].getText(), Toast.LENGTH_SHORT).show();
+                    destinationTextView.setText(favouritesButton[i].getText());
+                    setPanelVisibility(destinationPanel, true);
+                    //Toast.makeText(GPSActivity.this, "Navigating to " + favouritesButton[i].getText(), Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -168,13 +194,14 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         for (int i = 0; i < favouritesButton.length; i++)
             Utilities.GPS_FAVOURITES[i] = String.valueOf(favouritesButton[i].getText());
         Utilities.BUBBLE_POSITION = (ConstraintLayout.LayoutParams)callerBubble.getLayoutParams();
+        Utilities.DESTINATION = (destinationTextView.getText().toString() != null && (destinationTextView.getText()).toString().trim().length() > 0) ?
+                destinationTextView.getText().toString() : null;
     }
 
     private void setPanelVisibility(LinearLayout panel, boolean flag) {
         int state = flag ? View.VISIBLE : View.GONE;
-        for (int i = 0; i < panel.getChildCount(); i++) {
+        for (int i = 0; i < panel.getChildCount(); i++)
             panel.getChildAt(i).setVisibility(state);
-        }
         panel.setVisibility(state);
     }
 
@@ -202,7 +229,9 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
                 if (r[0].equalsIgnoreCase("navigate")) {
                     for (Button b : favouritesButton) {
                         if (b.getText().toString().toUpperCase().contains(r[1].toUpperCase())) {
-                            Toast.makeText(GPSActivity.this, "Navigating to " + b.getText(), Toast.LENGTH_SHORT).show();
+                            destinationTextView.setText(b.getText());
+                            setPanelVisibility(destinationPanel, true);
+                            //Toast.makeText(GPSActivity.this, "Navigating to " + b.getText(), Toast.LENGTH_SHORT).show();
                             searchAddressEditText.setHint("");
                             return;
                         }

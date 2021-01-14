@@ -25,6 +25,7 @@ public class Utilities {
     public static int RADIO_LIVE = 2;
     public static String[][] STATION_FAVOURITES = {{"ADD", "ADD"}, {"ADD", "ADD"}, {"ADD", "ADD"}};
     public static String[] GPS_FAVOURITES = {"ADD", "ADD", "ADD", "ADD", "ADD"};
+    public static String DESTINATION = null;
     public static int BRIGHTNESS_PROGRESS = 75;
     public static boolean PLAY_STATE = true;
     public static int MUSIC_PROGRESS = 75;
