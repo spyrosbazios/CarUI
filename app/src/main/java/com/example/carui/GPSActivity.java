@@ -38,6 +38,7 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
     private EditText searchAddressEditText, newLocationEditText, newAddressEditText;
     private Button newCancelButton, newAddButton, cancelDestination;
     private TextView destinationTextView;
+    private ImageView stigmaImageView;
     private int newFavouritePos;
     private SpeechRecognizer speechRecognizer;
     final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -55,6 +56,7 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         moreButton.setOnClickListener(this);
         searchAddressButton = (ImageButton)findViewById(R.id.search_btn);
         searchAddressButton.setOnClickListener(this);
+        stigmaImageView = (ImageView)findViewById(R.id.stigma_img);
         favouritesPanel = (LinearLayout)findViewById(R.id.linearlayout_favourites);
         setPanelVisibility(favouritesPanel, false);
         newFavouritePanel = (LinearLayout)findViewById(R.id.linearlayout_newfavourite);
@@ -100,8 +102,7 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         cancelDestination.setOnClickListener(this);
         destinationTextView = (TextView)findViewById(R.id.destinationvar_textview);
         if (Utilities.DESTINATION != null) {
-            destinationTextView.setText(Utilities.DESTINATION);
-            setPanelVisibility(destinationPanel, true);
+            setDestination(Utilities.DESTINATION);
         }
         else setPanelVisibility(destinationPanel, false);
     }
@@ -128,8 +129,8 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         }
         else if (v == searchAddressButton) {
             if (searchAddressEditText.getText().length() > 0) {
-                destinationTextView.setText(searchAddressEditText.getText());
-                setPanelVisibility(destinationPanel, true);
+                setDestination(searchAddressEditText.getText().toString());
+                searchAddressEditText.setHint("Search...");
                 searchAddressEditText.setText("");
                 //Toast.makeText(GPSActivity.this, "Navigating to " + searchAddressEditText.getText(), Toast.LENGTH_SHORT).show();
             }
@@ -167,8 +168,7 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
                     newFavouritePos = i;
                 }
                 else {
-                    destinationTextView.setText(favouritesButton[i].getText());
-                    setPanelVisibility(destinationPanel, true);
+                    setDestination(favouritesButton[i].getText().toString());
                     //Toast.makeText(GPSActivity.this, "Navigating to " + favouritesButton[i].getText(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -203,6 +203,15 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
         for (int i = 0; i < panel.getChildCount(); i++)
             panel.getChildAt(i).setVisibility(state);
         panel.setVisibility(state);
+        if (panel == newFavouritePanel) {
+            if (state == View.VISIBLE) stigmaImageView.setVisibility(View.GONE);
+            else stigmaImageView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setDestination(String dest) {
+        destinationTextView.setText(dest);
+        setPanelVisibility(destinationPanel, true);
     }
 
     private void handleSpeechRecognizer() {
@@ -229,19 +238,19 @@ public class GPSActivity extends AppCompatActivity implements View.OnClickListen
                 if (r[0].equalsIgnoreCase("navigate")) {
                     for (Button b : favouritesButton) {
                         if (b.getText().toString().toUpperCase().contains(r[1].toUpperCase())) {
-                            destinationTextView.setText(b.getText());
-                            setPanelVisibility(destinationPanel, true);
+                            setDestination(b.getText().toString());
                             //Toast.makeText(GPSActivity.this, "Navigating to " + b.getText(), Toast.LENGTH_SHORT).show();
-                            searchAddressEditText.setHint("");
                             return;
                         }
                     }
-                    searchAddressEditText.setText(r[1]);
+                    setDestination(r[1]);
                 }
                 else {
-                    searchAddressEditText.setHint("Search ...");
-                    Toast.makeText(GPSActivity.this, "Speech recognition failed", Toast.LENGTH_SHORT).show();
+                    searchAddressEditText.setText(data.get(0));
+                    //searchAddressEditText.setHint("Search...");
+                    //Toast.makeText(GPSActivity.this, "Speech recognition failed", Toast.LENGTH_SHORT).show();
                 }
+                searchAddressEditText.setHint("Search...");
             }
         });
     }

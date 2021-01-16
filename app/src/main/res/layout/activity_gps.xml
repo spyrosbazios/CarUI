@@ -40,6 +40,7 @@
             android:hint="Search ... "
             android:textColorHint="@color/white"
             android:textSize="15sp"
+            android:imeOptions="actionDone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -130,8 +131,8 @@
         app:layout_constraintTop_toBottomOf="@id/home_btn"
         android:layout_width="300dp"
         android:layout_height="150dp"
-        android:layout_marginStart="350dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginStart="325dp"
+        android:layout_marginTop="50dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -155,6 +156,7 @@
                 android:inputType="textCapCharacters"
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                android:imeOptions="actionDone"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -183,6 +185,7 @@
                 android:inputType="textCapCharacters"
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                android:imeOptions="actionDone"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -246,12 +249,12 @@
     <LinearLayout
         android:id="@+id/linearlayout_destination"
         android:background="@color/teal"
-        app:layout_constraintStart_toStartOf="@id/linearlayout_bar"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="225dp"
         android:layout_height="60dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
         <LinearLayout
