@@ -61,9 +61,10 @@ public class CallingActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        if (Utilities.CALLER != null) t.start();
+        //if (Utilities.CALLER != null) t.start();
 
         if (Utilities.CALLER != null) {
+            t.start();
             callerTextView.setText(Utilities.CALLER);
             setLeftView(Utilities.CALL_STATE);
         }

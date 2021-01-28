@@ -31,7 +31,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
 
     private ImageView musicLeftButton, musicRightButton;
     private ImageButton homeButton, playButton, voiceButton;
-    private TextView artistTextView, titleTextView;
+    private TextView artistTextView, titleTextView, testTextView;
     private ListView contactListView;
     private int s;
     private final String[] songList = {"SAINt JHN-Roses", "Kanye West-Gorgeous", "Frank Ocean-Pyramids"};
@@ -97,6 +97,9 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
         voiceButton.setOnClickListener(this);
         askVoicePermission();
         handleSpeechRecognizer();
+
+        testTextView = (TextView)findViewById(R.id.test_btn);
+        testTextView.setOnClickListener(this);
     }
 
     @Override
@@ -119,7 +122,6 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
                 playButton.setBackgroundResource(R.drawable.musicpause);
             else
                 playButton.setBackgroundResource(R.drawable.musicplay);
-
         }
         else if (v == musicLeftButton || v == musicRightButton) {
             if (v == musicLeftButton) s--;
@@ -134,6 +136,10 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(PhoneActivity.this, "Listening...", Toast.LENGTH_SHORT).show();
             speechRecognizer.cancel();
             speechRecognizer.startListening(speechRecognizerIntent);
+        }
+        else if (v == testTextView) {
+            this.updateUtilities();
+            startActivity(new Intent(PhoneActivity.this, CallingActivity.class));
         }
     }
 
