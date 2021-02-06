@@ -23,9 +23,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PhoneActivity extends AppCompatActivity implements View.OnClickListener, UpdateUtilities{
 
@@ -35,7 +34,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
     private ListView contactListView;
     private int s;
     private final String[] songList = {"SAINt JHN-Roses", "Kanye West-Gorgeous", "Frank Ocean-Pyramids"};
-    private final String[] contactList = {"Spyros", "Christos", "Manos", "Nantia", "Ion Androutsopoulos", "Chalkidis", "Dio", "Chara", "George"};
+    private final String[] contactList = {"Spyros", "Christos", "Manos", "Nantia", "Androutsopoulos Ion", "Halkidis Ilias", "Dio", "Chara", "George"};
     private SeekBar musicSeekBar;
     private boolean playState;
     private SpeechRecognizer speechRecognizer;
@@ -76,6 +75,7 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
         musicSeekBar.setProgress(Utilities.MUSIC_PROGRESS);
 
         contactListView = (ListView)findViewById(R.id.contacts_listview);
+        Arrays.sort(contactList);
         final ArrayAdapter<String> contactAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, contactList){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
