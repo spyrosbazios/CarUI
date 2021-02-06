@@ -98,8 +98,8 @@ public class PhoneActivity extends AppCompatActivity implements View.OnClickList
         askVoicePermission();
         handleSpeechRecognizer();
 
-        testTextView = (TextView)findViewById(R.id.test_btn);
-        testTextView.setOnClickListener(this);
+        //testTextView = (TextView)findViewById(R.id.test_btn);
+        //testTextView.setOnClickListener(this);
     }
 
     @Override

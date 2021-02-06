@@ -175,24 +175,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="175dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="200dp"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/test_btn"
-            android:background="@color/red"
-            android:text="TEST"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:gravity="center"
-            android:layout_width="70dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="30dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:focusable="true" />
         <ImageButton
             android:id="@+id/voice_btn"
             android:background="@drawable/voicebutton"
